@@ -51,3 +51,9 @@ export async function registerApp() {
     store.client_id = resp.client_id;
     store.client_secret = resp.client_secret;
 }
+
+export async function login(
+    username: string, 
+    password: string) {
+    
+}
