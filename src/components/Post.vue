@@ -9,7 +9,10 @@ const props = defineProps<{
 <template>
   <img :src="props.status.account.avatar" alt="avatar" />
   <b> {{ props.status.account.display_name }}</b>
-  <div v-html="props.status.content"></div>
+  <div v-if="props.status.reblog !== null" class="reblog">
+    <Post :status="props.status.reblog" />
+  </div>
+  <div v-else v-html="props.status.content"></div>
 </template>
 
 <style scoped>
@@ -19,5 +22,8 @@ const props = defineProps<{
   }
   div {
     margin-top: 10px;
+  }
+  .reblog {
+    padding: 20px;
   }
 </style>
