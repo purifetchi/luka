@@ -8,7 +8,10 @@ const props = defineProps<{
 
 <template>
   <img :src="props.status.account.avatar" alt="avatar" />
-  <b> {{ props.status.account.display_name }}</b>
+  <span>
+    <b> <RouterLink :to="`/user/${props.status.account.id}`">{{ props.status.account.display_name }}</RouterLink></b> 
+    <small>@{{ props.status.account.acct}}</small>
+  </span>
   <div v-if="props.status.reblog !== null" class="reblog">
     <Post :status="props.status.reblog" />
   </div>
