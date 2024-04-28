@@ -1,6 +1,7 @@
 import { config } from '@/config/config';
 import { store } from '@/store/store';
 import { AppRegisterResponse } from "./responses/apps/app-register-response";
+import {TokenResponse} from "./responses/oauth/token-response";
 
 /**
  * Calls a mastodon api.
@@ -52,8 +53,28 @@ export async function registerApp() {
     store.client_secret = resp.client_secret;
 }
 
+/**
+ * Logs into a mastodon instance.
+ * @param username The username of the user.
+ * @param password The password.
+ */
 export async function login(
     username: string, 
     password: string) {
+    const resp = await call<TokenResponse>("/oauth/token", {
+        grant_type: "password",
+        client_id: store.client_id,
+        client_secret: store.client_secret,
+        redirect_uri: "urn:ietf:wg:oauth:2.0:oob", // TODO: This is only a placeholder.
+
+        username: username,
+        password: password
+    });
     
+    if (resp.access_token === undefined) {
+        throw new Error("Unable to login");
+    } 
+
+    store.client_token = resp.access_token;
+    localStorage.setItem("client_token", resp.access_token);
 }

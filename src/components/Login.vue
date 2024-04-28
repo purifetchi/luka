@@ -1,31 +1,24 @@
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { call } from "@/api/mastodon.js";
-  import { TokenResponse } from "@/api/responses/oauth/token-response";
-  import { store } from "@/store/store";
+  import { login } from "@/api/mastodon.js";
 
-  const login = ref("");
+  const username = ref("");
   const password = ref("");
   
   let sendLogin = async () => {
-    const resp = await call<TokenResponse>("/oauth/token", {
-      grant_type: "password",
-      client_id: store.client_id,
-      client_secret: store.client_secret,
-      redirect_uri: "urn:ietf:wg:oauth:2.0:oob",
-      
-      username: login.value,
-      password: password.value
-    });
-    
-    store.client_token = resp.access_token;
-    localStorage.setItem("client_token", resp.access_token);
+    try {
+      await login(
+          username.value,
+          password.value);
+    } catch (e) {
+      console.error(e);
+    }
   }
 </script>
 
 <template>
   <form v-on:submit.prevent="sendLogin">
-    <input v-model="login" type="text" placeholder="login" required />
+    <input v-model="username" type="text" placeholder="login" required />
     <br>
     <input v-model="password" type="password" placeholder="password" required />
     <br>
