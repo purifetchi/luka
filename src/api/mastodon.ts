@@ -78,3 +78,17 @@ export async function login(
     store.client_token = resp.access_token;
     localStorage.setItem("client_token", resp.access_token);
 }
+
+/**
+ * Logs out the current client.
+ */
+export async function logout() {
+    const resp = await call<{}>("/oauth/revoke", {
+        client_id: store.client_id,
+        client_secret: store.client_secret,
+        token: store.client_token
+    });
+    
+    store.client_token = null;
+    localStorage.removeItem("client_token");
+}
