@@ -43,6 +43,7 @@ export async function call<TResponse>(
 export async function registerApp() {
     const resp = await call<AppRegisterResponse>("/api/v1/apps", {
         client_name: config.app_name,
+        scopes: "read write follow",
         redirect_uris: "urn:ietf:wg:oauth:2.0:oob" // TODO: Placeholder.
     });
 
