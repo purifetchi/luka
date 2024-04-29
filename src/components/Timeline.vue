@@ -16,9 +16,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="statuses !== null" v-for="status in statuses">
-    <Post :status="status" />
-    <hr>
+  <div class="space-y-2.5">
+    <Post v-if="statuses !== null" v-for="status in statuses" :status="status" />
   </div>
 </template>
 

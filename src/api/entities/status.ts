@@ -9,5 +9,9 @@ export interface Status {
     content: string,
     reblog?: Status, 
     
+    replies_count: number, 
+    reblogs_count: number, 
+    favourites_count: number
+    
     // TODO: Finish it.
 }
