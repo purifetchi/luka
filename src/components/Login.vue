@@ -2,6 +2,7 @@
   import { ref } from "vue";
   import { login } from "@/api/mastodon.js";
   import { FwbButton, FwbInput } from "flowbite-vue";
+  import { router } from "@/router/router";
 
   const username = ref("");
   const password = ref("");
@@ -11,6 +12,8 @@
       await login(
           username.value,
           password.value);
+      
+      router.replace("/timelines/home");
     } catch (e) {
       console.error(e);
     }

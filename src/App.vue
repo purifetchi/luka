@@ -11,9 +11,7 @@
 </script>
 
 <template>
-  <main class="h-full">
-    <RouterView />
-  </main>
+  <RouterView />
 </template>
 
 <style scoped>

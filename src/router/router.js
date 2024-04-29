@@ -1,13 +1,13 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Landing from "@/components/views/Landing.vue"; 
-import InstanceInformation from "@/components/InstanceInformation.vue";
-import HomeTimeline from "@/components/HomeTimeline.vue";
+import HomeTimeline from "@/components/views/HomeTimeline.vue";
 import UserView from "@/components/views/UserView.vue";
+import PublicTimeline from "@/components/views/PublicTimeline.vue";
 
 const routes = [
     { path: "/",  component: Landing },
-    { path: "/info", component: InstanceInformation },
-    { path: "/home", component: HomeTimeline },
+    { path: "/timelines/home", component: HomeTimeline },
+    { path: "/timelines/public", component: PublicTimeline },
     { path: "/user/:id", component: UserView }
 ];
 
