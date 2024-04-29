@@ -1,5 +1,6 @@
 <script setup>
 
+import SidePanelUserCard from "@/components/SidePanelUserCard.vue";
 </script>
 
 <template>
@@ -7,6 +8,8 @@
     <aside>
       <div class="sticky top-0">
         <h1>Luka</h1>
+        <br>
+        <SidePanelUserCard />
         <br>
         <RouterLink to="/timelines/home">Home</RouterLink>
         <br>

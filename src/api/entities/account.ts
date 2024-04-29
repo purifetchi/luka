@@ -7,7 +7,8 @@ export interface Account {
     acct: string, 
     display_name: string,
     note: string,
-    avatar: string
+    avatar: string,
+    header: string
     
     // TODO: Finish it
 }
