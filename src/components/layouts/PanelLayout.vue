@@ -5,16 +5,21 @@
 <template>
   <div class="flex flex-row justify-around">
     <aside>
-      <h1>Luka</h1>
-      <RouterLink to="/timelines/home">Home</RouterLink>
-      <br>
-      <RouterLink to="/timelines/public">Public</RouterLink>
+      <div class="sticky top-0">
+        <h1>Luka</h1>
+        <br>
+        <RouterLink to="/timelines/home">Home</RouterLink>
+        <br>
+        <RouterLink to="/timelines/public">Public</RouterLink>
+      </div>
     </aside>
     <main class="max-w-2xl">
       <slot></slot>
     </main>
     <aside>
-      <h1>wah</h1>
+      <div class="sticky top-0">
+        wah
+      </div>
     </aside>
   </div>
 </template>
