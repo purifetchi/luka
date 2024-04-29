@@ -11,14 +11,7 @@
 </script>
 
 <template>
-  <nav>
-    <ul>
-      <li><RouterLink to="/">Index</RouterLink></li>
-      <li><RouterLink to="/info">Instance information</RouterLink></li>
-      <li v-if="store.client_token !== null"><RouterLink to="/home">Home timeline</RouterLink></li>
-    </ul>
-  </nav>
-  <main>
+  <main class="h-full">
     <RouterView />
   </main>
 </template>

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import { call } from "@/api/mastodon";
 import { InstanceV1Information } from "@/api/responses/instance-v1-information";
+import { FwbA, FwbHeading, FwbP } from "flowbite-vue";
 
 const info = ref<InstanceV1Information>(null);
 
@@ -13,13 +14,12 @@ onMounted(async () => {
 
 <template>
   <div v-if="info">
-    <h1>{{ info.title }}</h1>
-    <br>
-    <h3>{{ info.description }}</h3>
+    <fwb-heading tag="h1">{{ info.title }}</fwb-heading>
+    <fwb-heading tag="h4">{{ info.description }}</fwb-heading>
+    <fwb-p class="mt-1.5">
+      Running <fwb-a class="text-orange-500 no-underline hover:underline" href="https://github.com/purifetchi/luka">luka</fwb-a>, in development.
+    </fwb-p>
   </div>
-  <h1 v-else>
-    Loading...
-  </h1>
 </template>
 
 <style scoped>
