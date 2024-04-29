@@ -3,16 +3,26 @@
 import { Account } from "@/api/entities/account";
 import Timeline from "@/components/Timeline.vue";
 import { call } from "@/api/mastodon";
-import { onMounted, ref } from "vue";
+import {onMounted, ref, watch} from "vue";
 import { useRoute } from "vue-router";
 import UserCard from "@/components/UserCard.vue";
 import PanelLayout from "@/components/layouts/PanelLayout.vue";
 
 const route = useRoute();
+const endpoint = ref<string>("");
 const account = ref<Account>(null);
 
-onMounted(async () => {
+let updateUserData = async () => {
   account.value = await call<Account>(`/api/v1/accounts/${ route.params.id }`);
+  endpoint.value = `/api/v1/accounts/${ route.params.id }/statuses`;
+};
+
+onMounted(async () => {
+  await updateUserData();
+});
+
+watch(() => route.params.id, async newId => {
+  await updateUserData();
 });
 
 </script>
@@ -24,7 +34,7 @@ onMounted(async () => {
       <br>
       <hr>
       <br>
-      <Timeline :endpoint="`/api/v1/accounts/${account.id}/statuses`" />
+      <Timeline :endpoint="endpoint" />
     </div>  
   </PanelLayout>
 </template>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted, ref} from "vue";
+import { onMounted, ref, watch } from "vue";
 import { call } from "@/api/mastodon";
 import { Status } from "@/api/entities/status";
 import Post from "@/components/Post.vue";
@@ -11,6 +11,10 @@ const props = defineProps<{
 const statuses = ref<Status[]>(null);
 
 onMounted(async () => {
+  statuses.value = await call<Status[]>(props.endpoint);
+});
+
+watch(() => props.endpoint, async () => {
   statuses.value = await call<Status[]>(props.endpoint);
 });
 </script>
