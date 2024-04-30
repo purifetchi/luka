@@ -22,9 +22,15 @@ const props = defineProps<{
     <div v-html="props.status.content"></div>
     <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
     <div class="flex flex-row justify-around">
-      <div>{{ props.status.replies_count }} comments</div>
-      <div>{{ props.status.favourites_count  }} likes</div>
-      <div>{{ props.status.reblogs_count }} boosts</div>
+      <div class="hover:cursor-pointer">
+        <v-icon name="ri-reply-line" />  {{ props.status.replies_count }}
+      </div>
+      <div class="hover:cursor-pointer">
+        <v-icon name="ri-heart-3-line" /> {{ props.status.favourites_count  }}
+      </div>
+      <div class="hover:cursor-pointer">
+        <v-icon name="ri-repeat-line" />  {{ props.status.reblogs_count }}
+      </div>
     </div>
   </div>
 </template>
