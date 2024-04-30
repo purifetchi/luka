@@ -23,7 +23,9 @@ const divClass = computed(() => {
     <video v-if="props.attachment.type == AttachmentType.Video" class="rounded-xl" muted controls>
       <source :src="props.attachment.url" />
     </video>
-    <div v-else class="rounded-xl w-full h-full bg-cover bg-center" :style="`background-image: url(${props.attachment.url})`"></div>
+    <a v-else :href="props.attachment.url" target="_blank">
+      <div class="rounded-xl w-full h-full bg-cover bg-center" :style="`background-image: url(${props.attachment.url})`"></div>
+    </a>
   </div>
 </template>
 
