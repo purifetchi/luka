@@ -2,18 +2,22 @@
 import { Status } from "@/api/entities/status";
 import { FwbAvatar } from "flowbite-vue";
 import PostContent from "@/components/PostContent.vue";
-import { onMounted, ref } from "vue";
+import {onMounted, ref, watch} from "vue";
 
 const props = defineProps<{
   status: Status
 }>();
 
 const baseStatus = ref<Status>(null);
-onMounted(() => {
+
+let updateBaseStatus = () => {
   baseStatus.value = props.status.reblog !== null ?
       props.status.reblog :
       props.status;
-});
+};
+
+onMounted(updateBaseStatus);
+watch(() => props.status, updateBaseStatus);
 
 </script>
 

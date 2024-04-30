@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import SidePanelUserCard from "@/components/SidePanelUserCard.vue";
-import {FwbButton} from "flowbite-vue";
+import { FwbButton } from "flowbite-vue";
 import {logout} from "@/api/mastodon";
 import { router } from "@/router/router.js";
 
@@ -12,7 +12,7 @@ let doLogout = async () => {
 </script>
 
 <template>
-  <div class="flex flex-row justify-around">
+  <div class="flex flex-row justify-center space-x-5">
     <aside class="hidden md:block">
       <div class="sticky top-0">
         <h1>Luka</h1>
