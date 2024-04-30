@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 
 import { Status } from "@/api/entities/status";
-import Post from "@/components/Post.vue";
 import { FwbAvatar } from "flowbite-vue";
 
 const props = defineProps<{
