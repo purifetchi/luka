@@ -25,15 +25,6 @@ onMounted(() => {
     </div>
     
     <PostContent :status="baseStatus" />
-
-    <div class="space-y-2">
-      <div v-html="baseStatus.content"></div>
-      <div class="flex flex-row justify-around">
-        <div>{{ baseStatus.replies_count }} comments</div>
-        <div>{{ baseStatus.favourites_count  }} likes</div>
-        <div>{{ baseStatus.reblogs_count }} boosts</div>
-      </div>
-    </div>
   </article>
 </template>
 

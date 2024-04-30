@@ -17,6 +17,14 @@ const props = defineProps<{
       <div class="text-sm text-gray-500 dark:text-gray-400">@{{ props.status.account.acct }}</div>
     </div>
   </div>
+  <div class="space-y-2">
+    <div v-html="props.status.content"></div>
+    <div class="flex flex-row justify-around">
+      <div>{{ props.status.replies_count }} comments</div>
+      <div>{{ props.status.favourites_count  }} likes</div>
+      <div>{{ props.status.reblogs_count }} boosts</div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
