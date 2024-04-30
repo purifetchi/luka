@@ -35,7 +35,7 @@ let loadMore = async () => {
 
 <template>
   <div v-if="statuses !== null" class="space-y-2.5">
-    <Post v-for="status in statuses" :status="status" class="hover:cursor-pointer" @click="router.push(`/posts/${status.id}`)" />
+    <Post v-for="status in statuses" :status="status" class="hover:cursor-pointer" @click="router.push(`/posts/${status.reblog !== null ? status.reblog.id : status.id}`)" />
     <Intersector @intersected="loadMore()" />
   </div>
   <fwb-spinner v-else size="12" />
