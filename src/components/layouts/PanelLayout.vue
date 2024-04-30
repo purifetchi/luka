@@ -13,7 +13,7 @@ let doLogout = async () => {
 </script>
 
 <template>
-  <div class="flex flex-row justify-center space-x-5">
+  <div class="flex flex-row justify-center md:space-x-5">
     <aside class="hidden md:block">
       <div class="sticky top-0">
         <h1>Luka</h1>
