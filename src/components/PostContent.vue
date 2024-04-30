@@ -20,7 +20,7 @@ const props = defineProps<{
   </div>
   <div class="space-y-2">
     <div v-html="props.status.content"></div>
-    <AttachmentGallery :attachments="props.status.media_attachments" />
+    <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
     <div class="flex flex-row justify-around">
       <div>{{ props.status.replies_count }} comments</div>
       <div>{{ props.status.favourites_count  }} likes</div>

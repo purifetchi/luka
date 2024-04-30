@@ -9,6 +9,7 @@ export interface Status {
     account: Account
     content: string,
     reblog?: Status,
+    sensitive: boolean, 
     
     media_attachments: MediaAttachment[],
     
