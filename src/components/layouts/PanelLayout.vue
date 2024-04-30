@@ -4,6 +4,7 @@ import SidePanelUserCard from "@/components/SidePanelUserCard.vue";
 import { FwbButton } from "flowbite-vue";
 import {logout} from "@/api/mastodon";
 import { router } from "@/router/router.js";
+import SidebarLink from "@/components/SidebarLink.vue";
 
 let doLogout = async () => {
   await logout();
@@ -18,11 +19,8 @@ let doLogout = async () => {
         <h1>Luka</h1>
         <br>
         <SidePanelUserCard />
-        <br>
-        <RouterLink to="/timelines/home">Home</RouterLink>
-        <br>
-        <RouterLink to="/timelines/public">Public</RouterLink>
-        <br>
+        <SidebarLink href="/timelines/home">🏠 Home</SidebarLink>
+        <SidebarLink href="/timelines/public">🌐 Public</SidebarLink>
         <fwb-button @click="doLogout()">Logout</fwb-button>
       </div>
     </aside>
