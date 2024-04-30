@@ -31,9 +31,6 @@ watch(() => route.params.id, async newId => {
   <PanelLayout>
     <div v-if="account">
       <UserCard :account="account" />
-      <br>
-      <hr>
-      <br>
       <Timeline :endpoint="endpoint" />
     </div>  
   </PanelLayout>
