@@ -8,7 +8,11 @@ export interface Account {
     display_name: string,
     note: string,
     avatar: string,
-    header: string
+    header: string,
+    
+    statuses_count : number,
+    followers_count: number,
+    following_count: number
     
     // TODO: Finish it
 }
