@@ -2,6 +2,7 @@
 
 import { Status } from "@/api/entities/status";
 import { FwbAvatar } from "flowbite-vue";
+import AttachmentGallery from "@/components/AttachmentGallery.vue";
 
 const props = defineProps<{
   status: Status
@@ -19,6 +20,7 @@ const props = defineProps<{
   </div>
   <div class="space-y-2">
     <div v-html="props.status.content"></div>
+    <AttachmentGallery :attachments="props.status.media_attachments" />
     <div class="flex flex-row justify-around">
       <div>{{ props.status.replies_count }} comments</div>
       <div>{{ props.status.favourites_count  }} likes</div>
