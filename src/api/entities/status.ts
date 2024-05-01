@@ -15,7 +15,10 @@ export interface Status {
     
     replies_count: number, 
     reblogs_count: number, 
-    favourites_count: number
+    favourites_count: number,
+    
+    favourited?: boolean, 
+    reblogged?: boolean
     
     // TODO: Finish it.
 }

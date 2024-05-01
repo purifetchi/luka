@@ -3,6 +3,7 @@
 import { Status } from "@/api/entities/status";
 import { FwbAvatar } from "flowbite-vue";
 import AttachmentGallery from "@/components/AttachmentGallery.vue";
+import PostActions from "@/components/PostActions.vue";
 
 const props = defineProps<{
   status: Status
@@ -21,17 +22,7 @@ const props = defineProps<{
   <div class="space-y-2">
     <div v-html="props.status.content"></div>
     <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
-    <div class="flex flex-row justify-around">
-      <div class="hover:cursor-pointer">
-        <v-icon name="ri-reply-line" />  {{ props.status.replies_count }}
-      </div>
-      <div class="hover:cursor-pointer">
-        <v-icon name="ri-heart-3-line" /> {{ props.status.favourites_count  }}
-      </div>
-      <div class="hover:cursor-pointer">
-        <v-icon name="ri-repeat-line" />  {{ props.status.reblogs_count }}
-      </div>
-    </div>
+    <PostActions :status="status" />
   </div>
 </template>
 
