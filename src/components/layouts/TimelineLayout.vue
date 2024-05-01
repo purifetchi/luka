@@ -15,7 +15,7 @@ let setNavbarTitle = (text: string) => {
 
 <template>
   <PanelLayout>
-    <nav class="mb-2 bg-slate-700 sticky top-0 z-50 flex justify-between shadow-md shadow-slate-700">
+    <nav class="mb-2 backdrop-blur-3xl sticky top-0 z-50 flex justify-between">
       <div class="flex flex-1 box-border">
         <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-home-4-line" url="/timelines/home" name="Home timeline" />
         <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-community-line" url="/timelines/community" name="Community timeline" />
