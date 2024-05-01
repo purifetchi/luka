@@ -51,9 +51,13 @@ let switchReply = () => {
       {{ status.favourites_count  }}
     </div>
     <div class="hover:cursor-pointer" @click="() => doSwitchableAction(props.status.reblogged, 'reblog', 'unreblog')">
-      <v-icon v-if="status.favourited" name="ri-repeat-fill" />
+      <v-icon v-if="status.reblogged" name="ri-repeat-fill" />
       <v-icon v-else name="ri-repeat-line" />
       {{ status.reblogs_count }}
+    </div>
+    <div class="hover:cursor-pointer" @click="() => doSwitchableAction(props.status.bookmarked, 'bookmark', 'unbookmark')">
+      <v-icon v-if="status.bookmarked" name="ri-bookmark-fill" />
+      <v-icon v-else name="ri-bookmark-line" />
     </div>
   </div>
   <ReplyBox v-if="replying" :inReplyTo="status.id" />
