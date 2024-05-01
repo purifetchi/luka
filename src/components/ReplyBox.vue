@@ -2,7 +2,7 @@
 
 import { FwbButton, FwbCheckbox, FwbInput, FwbSelect, FwbTextarea } from "flowbite-vue";
 import { ref } from "vue";
-import { Status } from "@/api/entities/status";
+import {Status, Visibility} from "@/api/entities/status";
 import { call } from "@/api/mastodon";
 
 const message = ref<string>("");
@@ -11,9 +11,9 @@ const visibility = ref<string>("public");
 const cw = ref<string>(null);
 
 const visibilities = [
-  { value: "public", name: "Public" },
-  { value: "unlisted", name: "Unlisted" },
-  { value: "private", name: "Followers Only" } 
+  { value: Visibility.Public, name: "Public" },
+  { value: Visibility.Unlisted, name: "Unlisted" },
+  { value: Visibility.Followers, name: "Followers Only" } 
 ];
 
 const props = defineProps<{
