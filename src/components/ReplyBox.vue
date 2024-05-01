@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 
-import {FwbButton, FwbCheckbox, FwbInput, FwbSelect, FwbTextarea} from "flowbite-vue";
+import { FwbButton, FwbCheckbox, FwbInput, FwbSelect, FwbTextarea } from "flowbite-vue";
 import { ref } from "vue";
 import { Status } from "@/api/entities/status";
 import { call } from "@/api/mastodon";
 
 const message = ref<string>("");
 const sensitive = ref<boolean>(false);
+const visibility = ref<string>("public");
+const cw = ref<string>(null);
 
 const visibilities = [
   { value: "public", name: "Public" },
   { value: "unlisted", name: "Unlisted" },
   { value: "private", name: "Followers Only" } 
 ];
-
-const visibility = ref<string>("public");
 
 const props = defineProps<{
   inReplyTo?: string
@@ -26,8 +26,13 @@ let sendPost = async () => {
     media_ids: [],
     visibility: visibility.value,
     in_reply_to_id: props.inReplyTo,
-    sensitive: sensitive.value
+    sensitive: sensitive.value,
+    spoiler_text: cw.value
   };
+  
+  message.value = "";
+  cw.value = "";
+  sensitive.value = false;
   
   const resp = await call<Status>("/api/v1/statuses", params);
 };
@@ -35,7 +40,7 @@ let sendPost = async () => {
 
 <template>
   <form v-on:submit.prevent="sendPost()">
-    <fwb-input v-if="sensitive" placeholder="Content warning (optional)" />
+    <fwb-input v-if="sensitive" v-model="cw" placeholder="Content warning (optional)" />
     <fwb-textarea v-model="message" label="" placeholder="Just arrived in Shinonome Laboratories"></fwb-textarea>
     <div class="flex flex-row justify-between">
       <fwb-select :options="visibilities" v-model="visibility" required />
