@@ -4,10 +4,16 @@ import { Status } from "@/api/entities/status";
 import { FwbAvatar } from "flowbite-vue";
 import AttachmentGallery from "@/components/AttachmentGallery.vue";
 import PostActions from "@/components/PostActions.vue";
+import {computed} from "vue";
+import {formatPost} from "@/formatting/post-formatter";
 
 const props = defineProps<{
   status: Status
 }>();
+
+const content = computed(() => {
+  return formatPost(props.status);
+});
 
 </script>
 
@@ -20,12 +26,11 @@ const props = defineProps<{
     </div>
   </div>
   <div class="space-y-2">
-    <div v-html="props.status.content"></div>
+    <div v-html="content"></div>
     <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
     <PostActions :status="status" />
   </div>
 </template>
 
 <style scoped>
-
 </style>

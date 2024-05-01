@@ -1,5 +1,6 @@
 import { Account } from "./account";
-import {MediaAttachment} from "./media-attachment";
+import { MediaAttachment } from "./media-attachment";
+import { CustomEmoji } from "./custom-emoji";
 
 /**
  * A mastodon status.
@@ -12,6 +13,7 @@ export interface Status {
     sensitive: boolean, 
     
     media_attachments: MediaAttachment[],
+    emojis: CustomEmoji[],
     
     replies_count: number, 
     reblogs_count: number, 
