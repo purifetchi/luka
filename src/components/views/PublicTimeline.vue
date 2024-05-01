@@ -1,13 +1,14 @@
 <script setup>
 
-import PanelLayout from "@/components/layouts/PanelLayout.vue";
 import Timeline from "@/components/Timeline.vue";
+import TimelineLayout from "@/components/layouts/TimelineLayout.vue";
+
 </script>
 
 <template>
-  <PanelLayout>
+  <TimelineLayout>
     <Timeline endpoint="/api/v1/timelines/public" />
-  </PanelLayout>
+  </TimelineLayout>
 </template>
 
 <style scoped>

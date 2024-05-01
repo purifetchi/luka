@@ -7,9 +7,9 @@ import { router } from "@/router/router.js";
 import App from './App.vue'
 
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { RiHeart3Line, RiRepeatLine, RiReplyLine, RiReplyFill, RiRepeatFill, RiHeart3Fill, RiEyeLine, RiEyeOffLine } from "oh-vue-icons/icons";
+import { RiHeart3Line, RiRepeatLine, RiReplyLine, RiReplyFill, RiRepeatFill, RiHeart3Fill, RiEyeLine, RiEyeOffLine, RiHome4Line, RiGlobalLine, RiCommunityLine, RiBookmarkLine } from "oh-vue-icons/icons";
 
-addIcons(RiHeart3Line, RiRepeatLine, RiReplyLine, RiReplyFill, RiRepeatFill, RiHeart3Fill, RiEyeLine, RiEyeOffLine);
+addIcons(RiHeart3Line, RiRepeatLine, RiReplyLine, RiReplyFill, RiRepeatFill, RiHeart3Fill, RiEyeLine, RiEyeOffLine, RiHome4Line, RiGlobalLine, RiCommunityLine, RiBookmarkLine);
 
 createApp(App)
     .component("v-icon", OhVueIcon)
