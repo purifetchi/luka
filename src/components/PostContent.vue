@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import { Status } from "@/api/entities/status";
-import { FwbAvatar } from "flowbite-vue";
+import {FwbAvatar, FwbDropdown, FwbListGroup, FwbListGroupItem} from "flowbite-vue";
 import AttachmentGallery from "@/components/AttachmentGallery.vue";
 import PostActions from "@/components/PostActions.vue";
 import {computed} from "vue";
@@ -18,12 +18,22 @@ const content = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center space-x-2 rtl:space-x-reverse">
-    <FwbAvatar size="md" :img="props.status.account.avatar" />
-    <div class="font-medium dark:text-white">
-      <b><RouterLink :to="`/user/${props.status.account.id}`">{{ props.status.account.display_name }}</RouterLink></b>
-      <div class="text-sm text-gray-500 dark:text-gray-400">@{{ props.status.account.acct }}</div>
+  <div class="flex justify-between">
+    <div class="flex items-center space-x-3 rtl:space-x-reverse">
+      <FwbAvatar size="md" :img="props.status.account.avatar" />
+      <div class="font-medium dark:text-white">
+        <b><RouterLink :to="`/user/${props.status.account.id}`">{{ props.status.account.display_name }}</RouterLink></b>
+        <div class="text-sm text-gray-500 dark:text-gray-400">@{{ props.status.account.acct }}</div>
+      </div>
     </div>
+    <fwb-dropdown>
+      <template #trigger>
+        <v-icon class="p-2 hover:cursor-pointer hover:bg-slate-800 transition ease-in duration-75 rounded float-right" scale="2" name="ri-menu-line" />
+      </template>
+      <fwb-list-group>
+        <a :href="props.status.url ?? props.status.uri" target="_blank">Open in original site</a>
+      </fwb-list-group>
+    </fwb-dropdown>
   </div>
   <div class="space-y-2">
     <div v-html="content"></div>

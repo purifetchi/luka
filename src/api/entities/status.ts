@@ -6,7 +6,9 @@ import { CustomEmoji } from "./custom-emoji";
  * A mastodon status.
  */
 export interface Status {
-    id: string, 
+    id: string,
+    uri: string,
+    url?: string, 
     account: Account
     content: string,
     reblog?: Status,
