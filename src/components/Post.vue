@@ -8,6 +8,10 @@ const props = defineProps<{
   status: Status
 }>();
 
+const emit = defineEmits<{
+  postClicked: [path: Status]
+}>();
+
 const baseStatus = ref<Status>(null);
 
 let updateBaseStatus = () => {
@@ -16,13 +20,25 @@ let updateBaseStatus = () => {
       props.status;
 };
 
+let clicked = (component: MouseEvent) => {
+  const name = component.target.tagName.toLowerCase();
+  
+  // TODO: Is there some better way we can decide on whether to handle the click or not?
+  if (name !== "img" && 
+      name !== "a" && 
+      name !== "svg" && 
+      name !== "video") {
+    emit("postClicked", baseStatus.value);    
+  }
+};
+
 onMounted(updateBaseStatus);
 watch(() => props.status, updateBaseStatus);
 
 </script>
 
 <template>
-  <article class="p-5 bg-slate-700 space-y-2" v-if="baseStatus">
+  <article @click="clicked" class="p-5 bg-slate-700 space-y-2" v-if="baseStatus">
     <div v-if="props.status.reblog !== null" class="flex flex-row space-x-1">
       <FwbAvatar size="sm" rounded :img="props.status.account.avatar" />
       <div class="text-sm">{{ props.status.account.display_name }} boosted</div>

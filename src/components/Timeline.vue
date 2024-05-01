@@ -31,11 +31,15 @@ let loadMore = async () => {
   const more = await call<Status[]>(`${props.endpoint}?max_id=${statuses.value[statuses.value.length - 1].id}`);
   statuses.value = statuses.value.concat(more);
 };
+
+let postClicked = async (post: Status) => {
+  await router.push(`/posts/${post.id}`);
+}
 </script>
 
 <template>
   <div v-if="statuses !== null" class="space-y-2.5">
-    <Post v-for="status in statuses" :status="status" class="hover:cursor-pointer" @click="router.push(`/posts/${status.reblog !== null ? status.reblog.id : status.id}`)" />
+    <Post v-for="status in statuses" :status="status" @postClicked="postClicked" class="hover:cursor-pointer" />
     <Intersector @intersected="loadMore()" />
   </div>
   <div v-else class="flex justify-center items-center h-screen">

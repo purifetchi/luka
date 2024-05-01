@@ -41,17 +41,21 @@ watch(() => route.params.id, async newRoute => {
   await loadPost();
 });
 
+let postClicked = async (post: Status) => {
+  await router.push(`/posts/${post.id}`);
+};
+
 </script>
 
 <template>
   <PanelLayout>
     <div v-if="loaded">
       <div v-for="ancestor in ascendants" class="m-3">
-        <Post :status="ancestor" class="bg-slate-900 hover:cursor-pointer" @click="router.push(`/posts/${ancestor.id}`)" />
+        <Post :status="ancestor" class="bg-slate-900 hover:cursor-pointer" @postClicked="postClicked" />
       </div>
       <Post v-if="post" :status="post" />
       <div v-for="descendant in descendants" class="m-3">
-        <Post :status="descendant" class="bg-slate-900 hover:cursor-pointer" @click="router.push(`/posts/${descendant.id}`)" />
+        <Post :status="descendant" class="bg-slate-900 hover:cursor-pointer" @postClicked="postClicked" />
       </div>
     </div>
     <fwb-spinner v-else />
