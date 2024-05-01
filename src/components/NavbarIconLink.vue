@@ -17,7 +17,7 @@ const router = useRouter();
 
 const style = computed(() => {
   if (window.location.pathname !== props.url) {
-    return "";
+    return "hover:bg-slate-600 transition ease-in";
   }
   
   return "bg-slate-800";
