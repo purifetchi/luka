@@ -21,7 +21,9 @@ import {
     RiCommunityLine, 
     RiBookmarkLine,
     RiBookmarkFill,
-    RiMenuLine
+    RiMenuLine,
+    RiLockUnlockLine,
+    RiLockLine
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -38,7 +40,9 @@ addIcons(
     RiCommunityLine, 
     RiBookmarkLine, 
     RiBookmarkFill,
-    RiMenuLine
+    RiMenuLine,
+    RiLockUnlockLine,
+    RiLockLine
 );
 
 createApp(App)

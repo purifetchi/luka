@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-import { Status } from "@/api/entities/status";
+import {Status, Visibility} from "@/api/entities/status";
 import {FwbAvatar, FwbDropdown, FwbListGroup, FwbListGroupItem} from "flowbite-vue";
 import AttachmentGallery from "@/components/AttachmentGallery.vue";
 import PostActions from "@/components/PostActions.vue";
@@ -26,14 +26,19 @@ const content = computed(() => {
         <div class="text-sm text-gray-500 dark:text-gray-400">@{{ props.status.account.acct }}</div>
       </div>
     </div>
-    <fwb-dropdown>
-      <template #trigger>
-        <v-icon class="p-2 hover:cursor-pointer hover:bg-slate-800 transition ease-in duration-75 rounded float-right" scale="2" name="ri-menu-line" />
-      </template>
-      <fwb-list-group>
-        <a :href="props.status.url ?? props.status.uri" target="_blank">Open in original site</a>
-      </fwb-list-group>
-    </fwb-dropdown>
+    <div class="flex items-center space-x-1">
+      <v-icon v-if="props.status.visibility == Visibility.Public" color="#ffffff55" name="ri-global-line" title="Public" />
+      <v-icon v-else-if="props.status.visibility == Visibility.Unlisted" color="#ffffff55" name="ri-lock-unlock-line" title="Unlisted" />
+      <v-icon v-else-if="props.status.visibility == Visibility.Followers" color="#ffffff55" name="ri-lock-line" title="Followers only" />
+      <fwb-dropdown>
+        <template #trigger>
+          <v-icon class="p-2 hover:cursor-pointer hover:bg-slate-800 transition ease-in duration-75 rounded float-right" scale="2" name="ri-menu-line" />
+        </template>
+        <fwb-list-group>
+          <a :href="props.status.url ?? props.status.uri" target="_blank">Open in original site</a>
+        </fwb-list-group>
+      </fwb-dropdown>
+    </div>
   </div>
   <div class="space-y-2">
     <div v-html="content"></div>

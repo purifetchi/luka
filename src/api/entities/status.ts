@@ -3,6 +3,31 @@ import { MediaAttachment } from "./media-attachment";
 import { CustomEmoji } from "./custom-emoji";
 
 /**
+ * Visibility of a status.
+ */
+export enum Visibility {
+    /**
+     * Visible to everyone, shown in public timelines.
+     */
+    Public = 'public',
+
+    /**
+     * Visible to public, but not included in public timelines.
+     */
+    Unlisted = 'unlisted',
+
+    /**
+     * Visible to followers only, and to any mentioned users.
+     */
+    Followers = 'private',
+
+    /**
+     * Visible only to mentioned users.
+     */
+    Direct = 'direct'
+}
+
+/**
  * A mastodon status.
  */
 export interface Status {
@@ -12,7 +37,8 @@ export interface Status {
     account: Account
     content: string,
     reblog?: Status,
-    sensitive: boolean, 
+    sensitive: boolean,
+    visibility: Visibility,
     
     media_attachments: MediaAttachment[],
     emojis: CustomEmoji[],
