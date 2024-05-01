@@ -12,7 +12,7 @@ export function formatPost(status: Status) : string {
     // Replace all the emoji in the post.
     let content = status.content;
     for (const emoji of status.emojis) {
-        content = content.replace(`:${emoji.shortcode}:`, `<img class="w-5 inline hover:w-10 transition-all" src="${emoji.url}" alt="${emoji.shortcode}" />`);
+        content = content.replace(`:${emoji.shortcode}:`, `<img title="${emoji.shortcode}" class="w-5 inline hover:w-10 transition-all" src="${emoji.url}" alt="${emoji.shortcode}" />`);
     }
     
     return content;
