@@ -3,6 +3,8 @@ import { store } from '@/store/store';
 import { AppRegisterResponse } from "./responses/apps/app-register-response";
 import {TokenResponse} from "./responses/oauth/token-response";
 
+const redirectUri = `${window.location.protocol}//${window.location.host}/auth_callback`;
+
 /**
  * Calls a mastodon api.
  * @param url The url of the method.
@@ -44,7 +46,7 @@ export async function registerApp() {
     const resp = await call<AppRegisterResponse>("/api/v1/apps", {
         client_name: config.app_name,
         scopes: "read write follow",
-        redirect_uris: "urn:ietf:wg:oauth:2.0:oob" // TODO: Placeholder.
+        redirect_uris: redirectUri
     });
 
     localStorage.setItem("client_id", resp.client_id);
@@ -66,7 +68,7 @@ export async function login(
         grant_type: "password",
         client_id: store.client_id,
         client_secret: store.client_secret,
-        redirect_uri: "urn:ietf:wg:oauth:2.0:oob", // TODO: This is only a placeholder.
+        redirect_uri: redirectUri,
 
         username: username,
         password: password
@@ -75,6 +77,29 @@ export async function login(
     if (resp.access_token === undefined) {
         throw new Error("Unable to login");
     } 
+
+    store.client_token = resp.access_token;
+    localStorage.setItem("client_token", resp.access_token);
+}
+
+/**
+ * Logs in from the OAuth flow.
+ * @param code The retrievec code.
+ */
+export async function loginFromOAuthFlow(code: string) {
+    const resp = await call<TokenResponse>("/oauth/token", {
+        grant_type: "authorization_code",
+        
+        client_id: store.client_id,
+        client_secret: store.client_secret,
+        redirect_uri: redirectUri,
+
+        code: code
+    });
+
+    if (resp.access_token === undefined) {
+        throw new Error("Unable to login");
+    }
 
     store.client_token = resp.access_token;
     localStorage.setItem("client_token", resp.access_token);

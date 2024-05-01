@@ -3,6 +3,8 @@
   import { login } from "@/api/mastodon.js";
   import { FwbButton, FwbInput } from "flowbite-vue";
   import { router } from "@/router/router";
+  import { config } from "@/config/config";
+  import { store } from "@/store/store";
 
   const username = ref("");
   const password = ref("");
@@ -17,15 +19,21 @@
     } catch (e) {
       console.error(e);
     }
-  }
+  };
+  
+  let sendTokenRequest = async () => {
+    const path = `/oauth/authorize?response_type=code&client_id=${store.client_id}&redirect_uri=${window.location.protocol}//${window.location.host}/auth_callback&scopes=read write follow`;
+    window.location.href = `${config.domain}${path}`;
+  };
 </script>
 
 <template>
-  <form v-on:submit.prevent="sendLogin" class="space-y-3">
+  <form v-if="config.token_flow === 'password'" v-on:submit.prevent="sendLogin" class="space-y-3">
     <fwb-input size="md" v-model="username" type="text" placeholder="Your handle (eg. prefetcher)" required />
     <fwb-input size="md" v-model="password" type="password" placeholder="Your password" required />
     <fwb-button type="submit">Login</fwb-button>
   </form>
+  <fwb-button v-else @click="sendTokenRequest">Sign in via {{ config.domain }}</fwb-button>
 </template>
 
 <style scoped>
