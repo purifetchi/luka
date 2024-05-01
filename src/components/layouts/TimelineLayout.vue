@@ -18,7 +18,7 @@ let setNavbarTitle = (text: string) => {
     <nav class="mb-2 bg-slate-700 sticky top-0 z-50 flex justify-between shadow-md shadow-slate-700">
       <div class="flex flex-1 box-border">
         <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-home-4-line" url="/timelines/home" name="Home timeline" />
-        <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-community-line" url="/timelines/local" name="Community timeline" />
+        <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-community-line" url="/timelines/community" name="Community timeline" />
         <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-global-line" url="/timelines/public" name="Public timeline" />
         <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-bookmark-line" url="/timelines/bookmarks" name="Bookmarks" />
       </div>
