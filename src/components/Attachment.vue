@@ -19,14 +19,16 @@ const divClass = computed(() => {
 </script>
 
 <template>
-  <div :class="divClass">
-    <video v-if="props.attachment.type == AttachmentType.Video" class="rounded-xl" muted controls>
-      <source :src="props.attachment.url" />
-    </video>
-    <a v-else :href="props.attachment.url" target="_blank">
-      <div class="rounded-xl w-full h-full bg-cover bg-center" :style="`background-image: url(${props.attachment.url})`"></div>
-    </a>
-  </div>
+  <video v-if="props.attachment.type == AttachmentType.Video" class="rounded-xl w-full h-full" muted controls>
+    <source :src="props.attachment.url" />
+  </video>
+  <a v-else :href="props.attachment.url" target="_blank">
+    <div class="rounded-xl w-full h-full bg-cover bg-center" :style="`background-image: url(${props.attachment.url})`">
+      <div v-if="props.sensitive" class="rounded-xl backdrop-blur-3xl hover:backdrop-blur-0 hover:opacity-0 transition-all ease-in w-full h-full flex items-center justify-center">
+        <v-icon color="black" scale="3" name="ri-eye-off-line" />
+      </div>
+    </div>
+  </a>
 </template>
 
 <style scoped>

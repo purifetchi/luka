@@ -17,7 +17,7 @@ const props = defineProps<{
     </div>
     <div v-else-if="props.attachments.length == 3" class="grid grid-cols-2 grid-rows-2 gap-2">
       <Attachment :attachment="props.attachments[0]" :sensitive="props.sensitive" />
-      <Attachment :attachment="props.attachments[1]" :sensitive="props.sensitive" />
+      <Attachment :attachment="props.attachments[1]" :sensitive="props.sensitive" class="row-span-2" />
       <Attachment :attachment="props.attachments[2]" :sensitive="props.sensitive" />
     </div>
     <div v-else class="grid grid-cols-2 grid-rows-2 gap-2">
