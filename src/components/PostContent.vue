@@ -20,7 +20,7 @@ const content = computed(() => {
 <template>
   <div class="flex items-center space-x-2 rtl:space-x-reverse">
     <FwbAvatar size="md" :img="props.status.account.avatar" />
-    <div class="space-y-1 font-medium dark:text-white">
+    <div class="font-medium dark:text-white">
       <b><RouterLink :to="`/user/${props.status.account.id}`">{{ props.status.account.display_name }}</RouterLink></b>
       <div class="text-sm text-gray-500 dark:text-gray-400">@{{ props.status.account.acct }}</div>
     </div>
