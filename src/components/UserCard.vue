@@ -43,7 +43,7 @@ onMounted(async () => {
     <div class="h-60">
       
     </div>
-    <div class="backdrop-blur-xl p-2.5 backdrop-brightness-75 space-y-2">
+    <div class="backdrop-blur-xl p-2.5 backdrop-brightness-50 space-y-2">
       <div class="flex space-x-3">
         <fwb-avatar size="xl" :img="props.account.avatar" />
         <div class="space-y-2 max-w-full">
@@ -61,8 +61,8 @@ onMounted(async () => {
       </div>
       <div class="flex flex-row justify-around">
         <div>{{ $t("account.posts_count", { count: props.account.statuses_count })}}</div>
-        <div>{{ $t("account.followers_count", { count: props.account.statuses_count })}}</div>
-        <div>{{ $t("account.following_count", { count: props.account.statuses_count })}}</div>
+        <div>{{ $t("account.followers_count", { count: props.account.followers_count })}}</div>
+        <div>{{ $t("account.following_count", { count: props.account.following_count })}}</div>
       </div>
     </div>
   </div>
