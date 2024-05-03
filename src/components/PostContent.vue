@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import {Status, Visibility} from "@/api/entities/status";
-import {FwbAvatar, FwbDropdown, FwbListGroup, FwbListGroupItem} from "flowbite-vue";
+import {FwbAvatar, FwbDropdown, FwbListGroup} from "flowbite-vue";
 import AttachmentGallery from "@/components/AttachmentGallery.vue";
 import PostActions from "@/components/PostActions.vue";
 import {computed} from "vue";
@@ -35,7 +35,7 @@ const content = computed(() => {
           <v-icon class="p-2 hover:cursor-pointer hover:bg-slate-800 transition ease-in duration-75 rounded float-right" scale="2" name="ri-menu-line" />
         </template>
         <fwb-list-group>
-          <a :href="props.status.url ?? props.status.uri" target="_blank">Open in original site</a>
+          <a :href="props.status.url ?? props.status.uri" target="_blank">{{ $t("actions.open_in_original") }}</a>
         </fwb-list-group>
       </fwb-dropdown>
     </div>

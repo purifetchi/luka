@@ -60,9 +60,9 @@ onMounted(async () => {
         
       </div>
       <div class="flex flex-row justify-around">
-        <div>{{ props.account.statuses_count }} posts</div>
-        <div>{{ props.account.followers_count }} followers</div>
-        <div>{{ props.account.following_count }} following</div>
+        <div>{{ $t("account.posts_count", { count: props.account.statuses_count })}}</div>
+        <div>{{ $t("account.followers_count", { count: props.account.statuses_count })}}</div>
+        <div>{{ $t("account.following_count", { count: props.account.statuses_count })}}</div>
       </div>
     </div>
   </div>
