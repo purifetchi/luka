@@ -1,31 +1,36 @@
 <script lang="ts" setup>
 
 import SidePanelUserCard from "@/components/SidePanelUserCard.vue";
-import { FwbButton } from "flowbite-vue";
-import {logout} from "@/api/mastodon";
-import { router } from "@/router/router.js";
-import SidebarLink from "@/components/SidebarLink.vue";
 import SidePanelNotificationCard from "@/components/SidePanelNotificationCard.vue";
+import NavbarIconLink from "@/components/NavbarIconLink.vue";
+import { ref } from "vue";
 
-let doLogout = async () => {
-  await logout();
-  router.replace("/");
+const title = ref<string>(localStorage.getItem("timeline"));
+
+let setNavbarTitle = (text: string) => {
+  title.value = text;
+  localStorage.setItem("timeline", text);
 };
+
 </script>
 
 <template>
   <div class="flex flex-row justify-center md:space-x-5">
     <aside class="hidden md:block">
       <div class="sticky top-0">
-        <h1>Luka</h1>
-        <br>
         <SidePanelUserCard />
-        <SidebarLink href="/timelines/home">🏠 Home</SidebarLink>
-        <SidebarLink href="/timelines/public">🌐 Public</SidebarLink>
-        <fwb-button @click="doLogout()">Logout</fwb-button>
       </div>
     </aside>
     <main class="max-w-2xl w-full">
+      <nav class="mb-2 backdrop-blur-3xl sticky top-0 z-50 flex justify-between">
+        <div class="flex flex-1 box-border">
+          <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-home-4-line" url="/timelines/home" name="Home timeline" />
+          <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-community-line" url="/timelines/community" name="Community timeline" />
+          <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-global-line" url="/timelines/public" name="Public timeline" />
+          <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-bookmark-line" url="/timelines/bookmarks" name="Bookmarks" />
+        </div>
+        <div class="font-bold flex flex-1 justify-end items-center mr-3">{{ title }}</div>
+      </nav>
       <slot></slot>
     </main>
     <aside class="hidden md:block">
