@@ -22,7 +22,7 @@ onMounted(async () => {
     </div>
   
     <div v-if="notifs" v-for="notification in notifs">
-      <NotificationItem :notification="notification" class="hover:bg-slate-800" />
+      <NotificationItem :notification="notification" class="p-3 hover:bg-slate-800" />
     </div>
   </div>
 </template>
