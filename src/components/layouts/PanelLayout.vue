@@ -5,6 +5,7 @@ import { FwbButton } from "flowbite-vue";
 import {logout} from "@/api/mastodon";
 import { router } from "@/router/router.js";
 import SidebarLink from "@/components/SidebarLink.vue";
+import SidePanelNotificationCard from "@/components/SidePanelNotificationCard.vue";
 
 let doLogout = async () => {
   await logout();
@@ -29,7 +30,7 @@ let doLogout = async () => {
     </main>
     <aside class="hidden md:block">
       <div class="sticky top-0">
-        wah
+        <SidePanelNotificationCard />
       </div>
     </aside>
   </div>
