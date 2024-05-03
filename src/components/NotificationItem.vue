@@ -12,10 +12,10 @@ const props = defineProps<{
 
 <template>
   <PostContent v-if="props.notification.type === NotificationType.Mention" :status="props.notification.status" />
-  <div class="p-2">
+  <div v-else class="p-2">
     <div class="flex flex-row">
       <FwbAvatar size="sm" rounded :img="props.notification.account.avatar" />
-      <div class="text-sm">{{ props.notification.account.display_name }} {{ props.notification.type }}</div>
+      <div class="text-sm">{{$t(`notification.${props.notification.type}`, { actor: props.notification.account.display_name })}}</div>
     </div>
     <div v-if="props.notification.status" v-html="props.notification.status.content" />
   </div>
