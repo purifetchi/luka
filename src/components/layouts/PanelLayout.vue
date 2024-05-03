@@ -29,7 +29,7 @@ let doLogout = async () => {
       <slot></slot>
     </main>
     <aside class="hidden md:block">
-      <div class="sticky top-0">
+      <div class="sticky top-5">
         <SidePanelNotificationCard />
       </div>
     </aside>

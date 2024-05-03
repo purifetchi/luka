@@ -16,12 +16,15 @@ onMounted(async () => {
 </script>
 
 <template>
-  <fwb-card v-if="store.self_account !== null" class="overflow-y-scroll max-h-[40rem] p-3">
-    <div v-if="notifs" v-for="notification in notifs">
-      <NotificationItem :notification="notification" />
-      <hr />
+  <div class="bg-slate-700 overflow-y-scroll overflow-x-hidden max-h-[40rem] max-w-[23rem]">
+    <div class="top-0 sticky backdrop-blur-3xl p-2 z-50 font-bold">
+      Notifications
     </div>
-  </fwb-card>
+  
+    <div v-if="notifs" v-for="notification in notifs">
+      <NotificationItem :notification="notification" class="hover:bg-slate-800" />
+    </div>
+  </div>
 </template>
 
 <style scoped>
