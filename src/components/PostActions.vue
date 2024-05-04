@@ -3,7 +3,7 @@
 import {Status, Visibility} from "@/api/entities/status";
 import { store } from "@/store/store";
 import { call } from "@/api/mastodon";
-import {onBeforeMount, ref} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import ReplyBox from "@/components/ReplyBox.vue";
 
 const props = defineProps<{
@@ -12,6 +12,13 @@ const props = defineProps<{
 
 const status = ref<Status>(null);
 const replying = ref<boolean>(false);
+
+const startingReply = computed(() => {
+  let mentions = `@${props.status.account.acct}`;
+  // TODO: Add in mentions   too.
+  
+  return mentions;
+});
 
 onBeforeMount(() => {
   status.value = props.status;
@@ -65,7 +72,7 @@ let switchReply = () => {
       <v-icon v-else name="ri-bookmark-line" />
     </div>
   </div>
-  <ReplyBox v-if="replying" :inReplyTo="status.id" />
+  <ReplyBox v-if="replying" :inReplyTo="status.id" :startingMessage="startingReply" />
 </template>
 
 <style scoped>

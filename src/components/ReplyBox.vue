@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import { FwbButton, FwbCheckbox, FwbInput, FwbSelect, FwbTextarea } from "flowbite-vue";
-import { ref } from "vue";
+import {onMounted, ref} from "vue";
 import {Status, Visibility} from "@/api/entities/status";
 import { call } from "@/api/mastodon";
 
@@ -17,8 +17,13 @@ const visibilities = [
 ];
 
 const props = defineProps<{
-  inReplyTo?: string
+  inReplyTo?: string,
+  startingMessage?: string
 }>();
+
+onMounted(() => {
+  message.value = props.startingMessage ?? "";
+});
 
 let sendPost = async () => {
   let params = {
