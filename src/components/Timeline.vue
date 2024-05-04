@@ -24,7 +24,7 @@ watch(() => props.endpoint, async () => {
 });
 
 let loadMore = async () => {
-  if (statuses.value === null) {
+  if (statuses.value === null || statuses.value.length < 1) {
     return;
   }
   
