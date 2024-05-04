@@ -36,6 +36,10 @@ onMounted(async () => {
   }
 });
 
+let bite = async () => {
+  await call<{}>(`/api/v1/bite?id=${props.account.id}`, {});
+};
+
 </script>
 
 <template>
@@ -55,6 +59,7 @@ onMounted(async () => {
               <fwb-button v-else>{{ buttonText }}</fwb-button>
             </span>
           </div>
+          <fwb-button @click="bite">Bite</fwb-button>
           <fwb-p v-html="props.account.note"></fwb-p>
         </div>
         

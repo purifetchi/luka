@@ -5,7 +5,8 @@ export default {
     "notification": {
         "follow": "{{actor}} has followed you",
         "reblog": "{{actor}} has boosted your post",
-        "favourite": "{{actor}} has liked your post"
+        "favourite": "{{actor}} has liked your post",
+        "bite": "{{actor}} has bit you"
     },
     "account": {
         "posts_count": "{{count}} posts",

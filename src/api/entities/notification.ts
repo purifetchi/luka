@@ -44,6 +44,11 @@ export enum NotificationType {
      * A status you interacted with has been edited.
      */
     Update = "update",
+
+    /**
+     * You or something you've made have been bitten.
+     */
+    Bite = "bite",
     
     // TODO: Finish the enum
 }
