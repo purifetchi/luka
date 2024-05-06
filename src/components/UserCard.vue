@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import { Account } from "@/api/entities/account";
-import {FwbAvatar, FwbButton, FwbHeading, FwbListGroup, FwbP} from "flowbite-vue";
+import { FwbAvatar, FwbButton, FwbHeading, FwbListGroup, FwbP } from "flowbite-vue";
 import { computed, onMounted, ref } from "vue";
 import { Relationship } from "@/api/entities/relationship";
 import { call } from "@/api/mastodon";
@@ -14,10 +14,16 @@ const props = defineProps<{
 }>();
 
 const relationship = ref<Relationship>(null);
+const button = ref(null);
+const processing = ref<boolean>(false);
 
 const buttonText = computed(() => {
   if (!relationship.value || store.self_account.id == props.account.id)
     return null;
+  
+  if (processing.value) {
+    return "Processing...";
+  }
   
   if (relationship.value.followed_by && relationship.value.following) {
     return "Mutuals";
@@ -42,6 +48,20 @@ let bite = async () => {
   await call<{}>(`/api/v1/bite?id=${props.account.id}`, {});
 };
 
+let follow = async () => {
+  if (relationship.value === null) {
+    return;
+  }
+  
+  processing.value = true;
+  const endpoint = relationship.value.following ?
+      `/api/v1/accounts/${props.account.id}/unfollow` :
+      `/api/v1/accounts/${props.account.id}/follow`;
+
+  processing.value = false;
+  relationship.value = await call<Relationship>(endpoint, {});
+};
+
 </script>
 
 <template>
@@ -49,7 +69,7 @@ let bite = async () => {
     <div class="h-60 flex items-start justify-end">
       <div class="flex items-center m-3 bg-slate-900 bg-opacity-60 p-2 space-x-2">
         <span v-if="buttonText">
-          <fwb-button size="sm">{{ buttonText }}</fwb-button>
+          <fwb-button size="sm" ref="button" @click.prevent="follow" :disabled="processing">{{ buttonText }}</fwb-button>
         </span>
         <Hamburger>
           <fwb-list-group>
