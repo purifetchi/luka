@@ -6,6 +6,7 @@ import AttachmentGallery from "@/components/AttachmentGallery.vue";
 import PostActions from "@/components/PostActions.vue";
 import {computed} from "vue";
 import {formatPost} from "@/formatting/post-formatter";
+import Hamburger from "@/components/Hamburger.vue";
 
 const props = defineProps<{
   status: Status
@@ -30,14 +31,11 @@ const content = computed(() => {
       <v-icon v-if="props.status.visibility == Visibility.Public" color="#ffffff55" name="ri-global-line" title="Public" />
       <v-icon v-else-if="props.status.visibility == Visibility.Unlisted" color="#ffffff55" name="ri-lock-unlock-line" title="Unlisted" />
       <v-icon v-else-if="props.status.visibility == Visibility.Followers" color="#ffffff55" name="ri-lock-line" title="Followers only" />
-      <fwb-dropdown>
-        <template #trigger>
-          <v-icon class="p-2 hover:cursor-pointer hover:bg-slate-800 transition ease-in duration-75 rounded float-right" scale="2" name="ri-menu-line" />
-        </template>
+      <Hamburger>
         <fwb-list-group>
           <a :href="props.status.url ?? props.status.uri" target="_blank">{{ $t("actions.open_in_original") }}</a>
         </fwb-list-group>
-      </fwb-dropdown>
+      </Hamburger>
     </div>
   </div>
   <div class="space-y-2">

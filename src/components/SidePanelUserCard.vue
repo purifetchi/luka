@@ -3,8 +3,10 @@ import { store } from "@/store/store.js";
 import { call } from "@/api/mastodon";
 import { onMounted } from "vue";
 import { Account } from "@/api/entities/account";
-import { FwbAvatar, FwbCard } from "flowbite-vue";
+import { FwbAvatar, FwbListGroup } from "flowbite-vue";
 import ReplyBox from "@/components/ReplyBox.vue";
+import Hamburger from "@/components/Hamburger.vue";
+import { logout } from "@/api/mastodon";
 
 onMounted(async () => {
   if (store.self_account !== null) {
@@ -28,6 +30,11 @@ onMounted(async () => {
         <b><RouterLink :to="`/user/${store.self_account.id}`">{{ store.self_account.display_name }}</RouterLink></b>
         <div class="text-sm text-gray-500 dark:text-gray-400">@{{ store.self_account.acct }}</div>
       </div>
+      <Hamburger>
+        <div>Follow requests</div>
+        <div>Settings</div>
+        <div class="text-red-700 hover:cursor-pointer" @click="logout">Log out</div>
+      </Hamburger>
     </div>
   </div>
   <ReplyBox />
