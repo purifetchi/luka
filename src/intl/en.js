@@ -15,5 +15,9 @@ export default {
     },
     "actions": {
         "open_in_original": "Open in original site"
+    },
+    "statuses": {
+        "boosted": "boosted",
+        "reply": "in reply to a thread"
     }
 };

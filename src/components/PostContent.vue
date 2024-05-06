@@ -19,6 +19,9 @@ const content = computed(() => {
 </script>
 
 <template>
+  <div v-if="props.status.in_reply_to_id" class="text-sm text-gray-400">
+    <v-icon name="ri-reply-line" scale="0.8"/> <span>{{ $t("statuses.reply") }}</span>
+  </div>
   <div class="flex justify-between">
     <div class="flex items-center space-x-3 rtl:space-x-reverse">
       <FwbAvatar size="md" :img="props.status.account.avatar" />

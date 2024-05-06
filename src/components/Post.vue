@@ -39,9 +39,12 @@ watch(() => props.status, updateBaseStatus);
 
 <template>
   <article @click="clicked" class="p-5 bg-slate-700 space-y-2" v-if="baseStatus">
-    <div v-if="props.status.reblog !== null" class="flex flex-row space-x-1">
+    <div v-if="props.status.reblog !== null" class="flex flex-row items-center space-x-2">
       <FwbAvatar size="sm" rounded :img="props.status.account.avatar" />
-      <div class="text-sm">{{ props.status.account.display_name }} boosted</div>
+      <div class="text-sm">
+        <b><RouterLink :to="`/user/${props.status.account.id}`">{{ props.status.account.display_name }}</RouterLink></b>
+        {{ $t("statuses.boosted") }}
+      </div>
     </div>
     
     <PostContent :status="baseStatus" />
