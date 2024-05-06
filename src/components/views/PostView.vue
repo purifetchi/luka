@@ -58,7 +58,9 @@ let postClicked = async (post: Status) => {
         <Post :status="descendant" class="bg-slate-900 hover:cursor-pointer" @postClicked="postClicked" />
       </div>
     </div>
-    <fwb-spinner v-else />
+    <div v-else class="flex justify-center items-center h-screen">
+      <fwb-spinner size="12" />
+    </div>
   </PanelLayout>
 </template>
 
