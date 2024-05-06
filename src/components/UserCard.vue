@@ -53,7 +53,7 @@ let bite = async () => {
         </span>
         <Hamburger>
           <fwb-list-group>
-            <HamburgerButton>Bite</HamburgerButton>
+            <HamburgerButton @click.prevent="bite">Bite</HamburgerButton>
           </fwb-list-group>
         </Hamburger>
       </div>
