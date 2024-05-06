@@ -45,7 +45,7 @@ export async function call<TResponse>(
 export async function registerApp() {
     const resp = await call<AppRegisterResponse>("/api/v1/apps", {
         client_name: config.app_name,
-        scopes: "read write follow",
+        scopes: "read write follow write:bites",
         redirect_uris: redirectUri
     });
 
