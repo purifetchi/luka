@@ -3,7 +3,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "lib": [ "es2015", "DOM" ]
+    "lib": [ "es2021", "DOM" ]
   },
   "exclude": ["node_modules", "dist"]
 }
