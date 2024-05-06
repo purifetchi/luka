@@ -2,11 +2,12 @@
   
 import PanelLayout from "@/components/layouts/PanelLayout.vue";
 import { useRoute } from "vue-router";
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import { SearchResponse } from "@/api/responses/search/search-response";
-import {call} from "@/api/mastodon";
+import { call } from "@/api/mastodon";
 import Post from "@/components/Post.vue";
-import {FwbHeading} from "flowbite-vue";
+import { FwbHeading } from "flowbite-vue";
+import FullPageSpinner from "@/components/FullPageSpinner.vue";
 
 const route = useRoute();
 const search = ref<SearchResponse>(null);
@@ -35,6 +36,7 @@ onMounted(async () => {
         <Post v-for="status in search.statuses" :status="status" />
       </div>
     </div>
+    <FullPageSpinner v-else />
   </PanelLayout>
 </template>
 

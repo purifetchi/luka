@@ -3,9 +3,9 @@ import { onMounted, ref, watch } from "vue";
 import { call } from "@/api/mastodon";
 import { Status } from "@/api/entities/status";
 import Post from "@/components/Post.vue";
-import {FwbSpinner} from "flowbite-vue";
 import { useRouter } from "vue-router";
 import Intersector from "@/components/Intersector.vue";
+import FullPageSpinner from "@/components/FullPageSpinner.vue";
 
 const router = useRouter();
 
@@ -42,9 +42,7 @@ let postClicked = async (post: Status) => {
     <Post v-for="status in statuses" :status="status" @postClicked="postClicked" class="hover:cursor-pointer" />
     <Intersector @intersected="loadMore()" />
   </div>
-  <div v-else class="flex justify-center items-center h-screen">
-    <fwb-spinner size="12" />
-  </div>
+  <FullPageSpinner v-else />
 </template>
 
 <style scoped>

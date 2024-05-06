@@ -49,7 +49,9 @@ export interface Status {
     
     favourited?: boolean, 
     reblogged?: boolean,
-    bookmarked?: boolean
+    bookmarked?: boolean,
+    
+    in_reply_to_id?: string
     
     // TODO: Finish it.
 }

@@ -7,7 +7,7 @@ import { useRoute, useRouter } from "vue-router";
 import {computed, onMounted, ref, watch} from "vue";
 import { call } from "@/api/mastodon";
 import { StatusContextResponse } from "@/api/responses/statuses/status-context-response";
-import { FwbSpinner } from "flowbite-vue";
+import FullPageSpinner from "@/components/FullPageSpinner.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -58,9 +58,7 @@ let postClicked = async (post: Status) => {
         <Post :status="descendant" class="bg-slate-900 hover:cursor-pointer" @postClicked="postClicked" />
       </div>
     </div>
-    <div v-else class="flex justify-center items-center h-screen">
-      <fwb-spinner size="12" />
-    </div>
+    <FullPageSpinner v-else />
   </PanelLayout>
 </template>
 
