@@ -27,7 +27,8 @@ import {
     RiBookmarkFill,
     RiMenuLine,
     RiLockUnlockLine,
-    RiLockLine
+    RiLockLine,
+    RiSearchLine
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -46,7 +47,8 @@ addIcons(
     RiBookmarkFill,
     RiMenuLine,
     RiLockUnlockLine,
-    RiLockLine
+    RiLockLine,
+    RiSearchLine
 );
 
 i18next.init({

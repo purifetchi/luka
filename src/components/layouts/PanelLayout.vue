@@ -4,6 +4,8 @@ import SidePanelUserCard from "@/components/SidePanelUserCard.vue";
 import SidePanelNotificationCard from "@/components/SidePanelNotificationCard.vue";
 import NavbarIconLink from "@/components/NavbarIconLink.vue";
 import { ref } from "vue";
+import { FwbInput } from "flowbite-vue";
+import SearchBox from "@/components/SearchBox.vue";
 
 const title = ref<string>(localStorage.getItem("timeline"));
 
@@ -17,7 +19,7 @@ let setNavbarTitle = (text: string) => {
 <template>
   <div class="flex flex-row justify-center md:space-x-5">
     <aside class="hidden md:block">
-      <div class="sticky top-0">
+      <div class="sticky top-5">
         <SidePanelUserCard />
       </div>
     </aside>
@@ -34,7 +36,8 @@ let setNavbarTitle = (text: string) => {
       <slot></slot>
     </main>
     <aside class="hidden md:block">
-      <div class="sticky top-5">
+      <div class="sticky top-5 space-y-4">
+        <SearchBox />
         <SidePanelNotificationCard />
       </div>
     </aside>
