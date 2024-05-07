@@ -27,8 +27,12 @@ let loadMore = async () => {
   if (statuses.value === null || statuses.value.length < 1) {
     return;
   }
-  
-  const more = await call<Status[]>(`${props.endpoint}?max_id=${statuses.value[statuses.value.length - 1].id}`);
+
+  const idFragment = props.endpoint.indexOf('?') > -1 ?
+      `&max_id=${statuses.value[statuses.value.length - 1].id}` :
+      `?max_id=${statuses.value[statuses.value.length - 1].id}`;
+
+  const more = await call<Status[]>(`${props.endpoint}${idFragment}`);
   statuses.value = statuses.value.concat(more);
 };
 
