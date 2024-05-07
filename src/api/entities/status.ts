@@ -39,6 +39,7 @@ export interface Status {
     reblog?: Status,
     sensitive: boolean,
     visibility: Visibility,
+    created_at: string, 
     
     media_attachments: MediaAttachment[],
     emojis: CustomEmoji[],

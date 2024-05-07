@@ -5,6 +5,7 @@ import { store } from "@/store/store";
 import { call } from "@/api/mastodon";
 import {computed, onBeforeMount, ref} from "vue";
 import ReplyBox from "@/components/ReplyBox.vue";
+import { formatDateRelative } from "@/formatting/date-formatter";
 
 const props = defineProps<{
   status: Status
@@ -71,6 +72,7 @@ let switchReply = () => {
       <v-icon v-if="status.bookmarked" name="ri-bookmark-fill" />
       <v-icon v-else name="ri-bookmark-line" />
     </div>
+    <div class="text-gray-400">{{ formatDateRelative(status.created_at) }}</div>
   </div>
   <ReplyBox v-if="replying" :inReplyTo="status.id" :startingMessage="startingReply" />
 </template>

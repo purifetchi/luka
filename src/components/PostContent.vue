@@ -42,7 +42,7 @@ const content = computed(() => {
     </div>
   </div>
   <div class="space-y-2">
-    <div v-html="content"></div>
+    <div v-html="content" class="post-content"></div>
     <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
     <PostActions :status="status" />
   </div>
