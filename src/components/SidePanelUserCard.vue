@@ -7,6 +7,7 @@ import { FwbAvatar, FwbListGroup } from "flowbite-vue";
 import ReplyBox from "@/components/ReplyBox.vue";
 import Hamburger from "@/components/Hamburger.vue";
 import { logout } from "@/api/mastodon";
+import HamburgerButton from "@/components/HamburgerButton.vue";
 
 onMounted(async () => {
   if (store.self_account !== null) {
@@ -31,9 +32,9 @@ onMounted(async () => {
         <div class="text-sm text-gray-500 dark:text-gray-400">@{{ store.self_account.acct }}</div>
       </div>
       <Hamburger>
-        <div>Follow requests</div>
-        <div>Settings</div>
-        <div class="text-red-700 hover:cursor-pointer" @click="logout">Log out</div>
+        <HamburgerButton>Follow requests</HamburgerButton>
+        <HamburgerButton>Settings</HamburgerButton>
+        <HamburgerButton class="text-red-700 hover:cursor-pointer" @click="logout">Log out</HamburgerButton>
       </Hamburger>
     </div>
   </div>

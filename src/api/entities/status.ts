@@ -38,6 +38,7 @@ export interface Status {
     content: string,
     reblog?: Status,
     sensitive: boolean,
+    spoiler_text?: string, 
     visibility: Visibility,
     created_at: string, 
     

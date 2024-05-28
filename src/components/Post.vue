@@ -27,7 +27,9 @@ let clicked = (component: MouseEvent) => {
   if (name !== "img" && 
       name !== "a" && 
       name !== "svg" && 
-      name !== "video") {
+      name !== "video" &&
+      name !== "summary" &&
+      name !== "details") {
     emit("postClicked", baseStatus.value);    
   }
 };

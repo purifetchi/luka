@@ -7,6 +7,8 @@ import PostActions from "@/components/PostActions.vue";
 import {computed} from "vue";
 import {formatPost} from "@/formatting/post-formatter";
 import Hamburger from "@/components/Hamburger.vue";
+import HamburgerButton from "@/components/HamburgerButton.vue";
+import SensitiveWrapper from "@/components/SensitiveWrapper.vue";
 
 const props = defineProps<{
   status: Status
@@ -35,15 +37,15 @@ const content = computed(() => {
       <v-icon v-else-if="props.status.visibility == Visibility.Unlisted" color="#ffffff55" name="ri-lock-unlock-line" title="Unlisted" />
       <v-icon v-else-if="props.status.visibility == Visibility.Followers" color="#ffffff55" name="ri-lock-line" title="Followers only" />
       <Hamburger>
-        <fwb-list-group>
-          <a :href="props.status.url ?? props.status.uri" target="_blank">{{ $t("actions.open_in_original") }}</a>
-        </fwb-list-group>
+        <HamburgerButton :href="props.status.url ?? props.status.uri" target="_blank">{{ $t("actions.open_in_original") }}</HamburgerButton>
       </Hamburger>
     </div>
   </div>
   <div class="space-y-2">
-    <div v-html="content" class="post-content"></div>
-    <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
+    <SensitiveWrapper :sensitive="props.status.sensitive" :spoiler_text="props.status.spoiler_text">
+      <div v-html="content" class="post-content"></div>
+      <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
+    </SensitiveWrapper>
     <PostActions :status="status" />
   </div>
 </template>
