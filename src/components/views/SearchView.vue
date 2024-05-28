@@ -2,7 +2,7 @@
   
 import PanelLayout from "@/components/layouts/PanelLayout.vue";
 import { useRoute } from "vue-router";
-import { onMounted, ref } from "vue";
+import {onMounted, ref, watch} from "vue";
 import { SearchResponse } from "@/api/responses/search/search-response";
 import { call } from "@/api/mastodon";
 import Post from "@/components/Post.vue";
@@ -12,13 +12,20 @@ import FullPageSpinner from "@/components/FullPageSpinner.vue";
 const route = useRoute();
 const search = ref<SearchResponse>(null);
 
-onMounted(async () => {
+let doSearch = async () => {
   if (typeof(route.query.query) !== "string") {
     return;
   }
-  
+
   search.value = await call<SearchResponse>(`/api/v2/search?q=${encodeURIComponent(route.query.query)}&resolve=true`);
-});
+};
+
+onMounted(doSearch);
+
+watch(
+    () => route.query.query,
+    doSearch
+);
 
 </script>
 
