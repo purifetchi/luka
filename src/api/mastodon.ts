@@ -4,6 +4,7 @@ import { AppRegisterResponse } from "./responses/apps/app-register-response";
 import {TokenResponse} from "./responses/oauth/token-response";
 
 const redirectUri = `${window.location.protocol}//${window.location.host}/auth_callback`;
+export const scopes = 'read write follow write:bites';
 
 /**
  * Calls a mastodon api.
@@ -45,7 +46,7 @@ export async function call<TResponse>(
 export async function registerApp() {
     const resp = await call<AppRegisterResponse>("/api/v1/apps", {
         client_name: config.app_name,
-        scopes: "read write follow write:bites",
+        scopes: scopes,
         redirect_uris: redirectUri
     });
 
