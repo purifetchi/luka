@@ -13,7 +13,8 @@ const cw = ref<string>(null);
 const visibilities = [
   { value: Visibility.Public, name: "Public" },
   { value: Visibility.Unlisted, name: "Unlisted" },
-  { value: Visibility.Followers, name: "Followers Only" } 
+  { value: Visibility.Followers, name: "Followers Only" },
+  { value: Visibility.Direct, name: "Direct Message" }
 ];
 
 const props = defineProps<{
