@@ -7,14 +7,25 @@ const redirectUri = `${window.location.protocol}//${window.location.host}/auth_c
 export const scopes = 'read write follow write:bites';
 
 /**
+ * The HTTP method to use.
+ */
+export enum Method {
+    GET = "GET",
+    POST = "POST",
+    PUT = "PUT",
+}
+
+/**
  * Calls a mastodon api.
  * @param url The url of the method.
  * @param params The parameters to pass.
+ * @param methodOverride The method override.
  * @returns {Promise<TResponse>}
  */
 export async function call<TResponse>(
     url: string,
-    params: any = null): Promise<TResponse> {
+    params: any = null,
+    methodOverride?: Method): Promise<TResponse> {
     let data: Response;
     
     let headers: any = {};
@@ -33,7 +44,7 @@ export async function call<TResponse>(
         }
         
         data = await fetch(`${config.domain}${url}`, {
-           method: 'POST',
+           method: methodOverride ?? "POST",
            body: body,
             
            headers: headers
