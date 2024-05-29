@@ -42,7 +42,7 @@ const content = computed(() => {
     </div>
   </div>
   <div class="space-y-2">
-    <SensitiveWrapper :sensitive="props.status.sensitive" :spoiler_text="props.status.spoiler_text">
+    <SensitiveWrapper :sensitive="props.status.spoiler_text !== ''" :spoiler_text="props.status.spoiler_text">
       <div v-html="content" class="post-content"></div>
       <AttachmentGallery :sensitive="props.status.sensitive" :attachments="props.status.media_attachments" />
     </SensitiveWrapper>
