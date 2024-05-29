@@ -18,7 +18,7 @@ let setNavbarTitle = (text: string) => {
 
 <template>
   <div class="flex flex-row justify-center md:space-x-5">
-    <aside class="hidden md:block">
+    <aside class="hidden max-w-[20rem] w-full md:block">
       <div class="sticky top-5">
         <SidePanelUserCard />
       </div>
@@ -35,7 +35,7 @@ let setNavbarTitle = (text: string) => {
       </nav>
       <slot></slot>
     </main>
-    <aside class="hidden md:block">
+    <aside class="hidden max-w-[20rem] w-full md:block">
       <div class="sticky top-5 space-y-4">
         <SearchBox />
         <SidePanelNotificationCard />
