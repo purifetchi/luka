@@ -6,6 +6,7 @@ import { Notification } from "@/api/entities/notification";
 import { onMounted, ref } from "vue";
 import { call } from "@/api/mastodon";
 import NotificationItem from "@/components/NotificationItem.vue";
+import FullPageSpinner from "@/components/FullPageSpinner.vue";
 
 const notifs = ref<Notification[]>(null);
 
@@ -24,6 +25,7 @@ onMounted(async () => {
     <div v-if="notifs" v-for="notification in notifs">
       <NotificationItem :notification="notification" class="p-3 hover:bg-slate-800" />
     </div>
+    <FullPageSpinner v-else />
   </div>
 </template>
 
