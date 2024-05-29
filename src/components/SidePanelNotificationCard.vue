@@ -22,8 +22,13 @@ onMounted(async () => {
       Notifications
     </div>
   
-    <div v-if="notifs" v-for="notification in notifs">
-      <NotificationItem :notification="notification" class="p-3 hover:bg-slate-800" />
+    <div v-if="notifs">
+      <NotificationItem v-if="notifs.length > 0" 
+                        v-for="notification in notifs" 
+                        :notification="notification" class="p-3 hover:bg-slate-800" />
+      <div v-else class="text-xs text-gray-400 text-center m-3">
+        It's a bit empty in here, make some noise!
+      </div>
     </div>
     <FullPageSpinner v-else />
   </div>
