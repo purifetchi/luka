@@ -23,11 +23,18 @@ export async function call<TResponse>(
     }
     
     if (params !== null) {
-        headers['Content-Type'] = 'application/json';
+        let body;
+        if (params instanceof FormData) {
+            body = params;
+        }
+        else {
+            headers['Content-Type'] = 'application/json';
+            body = JSON.stringify(params);
+        }
         
         data = await fetch(`${config.domain}${url}`, {
            method: 'POST',
-           body: JSON.stringify(params),
+           body: body,
             
            headers: headers
         });
