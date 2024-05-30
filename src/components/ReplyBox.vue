@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 
-import { FwbButton, FwbCheckbox, FwbInput, FwbSelect, FwbTextarea } from "flowbite-vue";
+import { FwbButton, FwbInput, FwbTextarea } from "flowbite-vue";
 import {onMounted, ref} from "vue";
 import {Status, Visibility} from "@/api/entities/status";
 import { call } from "@/api/mastodon";
 import { MediaAttachment } from "@/api/entities/media-attachment";
-import Attachment from "@/components/Attachment.vue";
-import AttachmentGallery from "@/components/AttachmentGallery.vue";
 import ReplyBoxAttachment from "@/components/ReplyBoxAttachment.vue";
+import IconButton from "@/components/IconButton.vue";
 
 const message = ref<string>("");
 const sensitive = ref<boolean>(false);
@@ -19,10 +18,10 @@ const attachments = ref<MediaAttachment[]>([]);
 const uploading = ref<boolean>(false);
 
 const visibilities = [
-  { value: Visibility.Public, name: "Public" },
-  { value: Visibility.Unlisted, name: "Unlisted" },
-  { value: Visibility.Followers, name: "Followers Only" },
-  { value: Visibility.Direct, name: "Direct Message" }
+  { value: Visibility.Public, icon: "ri-global-line" },
+  { value: Visibility.Unlisted, icon: "ri-lock-unlock-line" },
+  { value: Visibility.Followers, icon: "ri-lock-line" },
+  { value: Visibility.Direct, icon: "ri-mail-line" }
 ];
 
 const props = defineProps<{
@@ -73,10 +72,15 @@ let sendPost = async () => {
     <input ref="fileUpload" type="file" id="fileUpload" hidden :disabled="uploading" v-on:input.prevent="attachFile"/>
     <fwb-input v-if="sensitive" v-model="cw" placeholder="Content warning (optional)" />
     <fwb-textarea v-model="message" label="" placeholder="Just arrived in Shinonome Laboratories"></fwb-textarea>
-    <div class="flex flex-row justify-between">
-      <fwb-select :options="visibilities" v-model="visibility" required />
-      <fwb-checkbox v-model="sensitive">Sensitive</fwb-checkbox>
-      <fwb-button v-on:click.prevent="fileUpload.click()">Attach</fwb-button>
+    <div class="flex flex-row justify-between space-x-1">
+      <IconButton 
+          :icon="vis.icon" 
+          :selected="vis.value == visibility" 
+          v-on:click.prevent="visibility = vis.value" 
+          v-for="vis in visibilities" toggle 
+      />
+      <IconButton icon="ri-eye-off-line" v-on:click.prevent="sensitive = !sensitive" :selected="sensitive" toggle/>
+      <IconButton v-on:click.prevent="fileUpload.click()" icon="ri-upload-2-line" />
       <fwb-button>Post</fwb-button>
     </div>
     <div v-if="attachments.length > 0" class="p-2 w-full max-h-[20rem] overflow-y-scroll">

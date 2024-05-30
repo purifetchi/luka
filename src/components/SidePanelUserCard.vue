@@ -23,7 +23,7 @@ onMounted(async () => {
 </script>
 
 <template>
- <div v-if="store.self_account !== null" class="space-y-3 border-[1px] border-slate-700">
+ <div v-if="store.self_account !== null" class="border-[1px] border-slate-700">
   <div class="bg-cover bg-center" :style="`background-image: url(${store.self_account.header});`">
     <div class="backdrop-blur backdrop-brightness-50 flex items-center space-x-2 p-3 bg-gradient-to-b from-transparent to-slate-800">
       <FwbAvatar size="lg" :img="store.self_account.avatar" />
@@ -38,7 +38,7 @@ onMounted(async () => {
       </Hamburger>
     </div>
   </div>
-  <ReplyBox />
+  <ReplyBox class="p-3" />
  </div>
 </template>
 
