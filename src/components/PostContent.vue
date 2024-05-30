@@ -36,6 +36,7 @@ const content = computed(() => {
       <v-icon v-if="props.status.visibility == Visibility.Public" color="#ffffff55" name="ri-global-line" title="Public" />
       <v-icon v-else-if="props.status.visibility == Visibility.Unlisted" color="#ffffff55" name="ri-lock-unlock-line" title="Unlisted" />
       <v-icon v-else-if="props.status.visibility == Visibility.Followers" color="#ffffff55" name="ri-lock-line" title="Followers only" />
+      <v-icon v-else color="#ffffff55" name="ri-mail-line" title="Followers only" />
       <Hamburger>
         <HamburgerButton :href="props.status.url ?? props.status.uri" target="_blank">{{ $t("actions.open_in_original") }}</HamburgerButton>
       </Hamburger>

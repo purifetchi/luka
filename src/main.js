@@ -29,7 +29,8 @@ import {
     RiLockUnlockLine,
     RiLockLine,
     RiSearchLine,
-    RiUpload2Line
+    RiUpload2Line,
+    RiMailLine
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -50,7 +51,8 @@ addIcons(
     RiLockUnlockLine,
     RiLockLine,
     RiSearchLine,
-    RiUpload2Line
+    RiUpload2Line,
+    RiMailLine
 );
 
 i18next.init({
