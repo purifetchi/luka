@@ -11,6 +11,7 @@ import HamburgerButton from "@/components/HamburgerButton.vue";
 import SensitiveWrapper from "@/components/SensitiveWrapper.vue";
 import { store } from "@/store/store";
 import { call, Method } from "@/api/mastodon";
+import {replaceEmojisInText} from "@/formatting/post-formatter";
 
 const deleted = ref<boolean>(false);
 
@@ -43,7 +44,11 @@ let deletePost = async () => {
       <div class="flex items-center space-x-3 rtl:space-x-reverse">
         <FwbAvatar size="md" :img="props.status.account.avatar" />
         <div class="font-medium dark:text-white">
-          <b><RouterLink :to="`/user/${props.status.account.id}`">{{ props.status.account.display_name }}</RouterLink></b>
+          <b>
+            <RouterLink :to="`/user/${props.status.account.id}`">
+              <span v-html="replaceEmojisInText(props.status.account.display_name, props.status.account)" />
+            </RouterLink>
+          </b>
           <div class="text-sm text-gray-500 dark:text-gray-400">@{{ props.status.account.acct }}</div>
         </div>
       </div>
