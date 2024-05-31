@@ -1,7 +1,9 @@
+import { EntityWithEmoji } from "./abstract/entity-with-emoji";
+
 /**
  * A mastodon account.
  */
-export interface Account {
+export interface Account extends EntityWithEmoji {
     id: string, 
     username: string,
     acct: string, 

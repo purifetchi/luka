@@ -1,6 +1,6 @@
 import { Account } from "./account";
 import { MediaAttachment } from "./media-attachment";
-import { CustomEmoji } from "./custom-emoji";
+import { EntityWithEmoji } from "./abstract/entity-with-emoji";
 
 /**
  * Visibility of a status.
@@ -30,7 +30,7 @@ export enum Visibility {
 /**
  * A mastodon status.
  */
-export interface Status {
+export interface Status extends EntityWithEmoji {
     id: string,
     uri: string,
     url?: string, 
@@ -43,7 +43,6 @@ export interface Status {
     created_at: string, 
     
     media_attachments: MediaAttachment[],
-    emojis: CustomEmoji[],
     
     replies_count: number, 
     reblogs_count: number, 
