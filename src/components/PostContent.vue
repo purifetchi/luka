@@ -10,6 +10,7 @@ import Hamburger from "@/components/Hamburger.vue";
 import HamburgerButton from "@/components/HamburgerButton.vue";
 import SensitiveWrapper from "@/components/SensitiveWrapper.vue";
 import { store } from "@/store/store";
+import { call, Method } from "@/api/mastodon";
 
 const deleted = ref<boolean>(false);
 
@@ -20,6 +21,13 @@ const props = defineProps<{
 const content = computed(() => {
   return formatPost(props.status);
 });
+
+let deletePost = async () => {
+  const resp = await call<{}>(`/api/v1/statuses/${props.status.id}`, {}, Method.DELETE);
+  if (resp !== undefined && resp !== null) {
+    deleted.value = true;
+  }
+};
 
 </script>
 
@@ -46,7 +54,7 @@ const content = computed(() => {
         <v-icon v-else color="#ffffff55" name="ri-mail-line" title="Followers only" />
         <Hamburger>
           <HamburgerButton :href="props.status.url ?? props.status.uri" target="_blank">{{ $t("actions.open_in_original") }}</HamburgerButton>
-          <HamburgerButton v-if="store.self_account.id == props.status.account.id" v-on:click="deleted = true">{{ $t("actions.delete_post") }}</HamburgerButton>
+          <HamburgerButton v-if="store.self_account.id == props.status.account.id" v-on:click="deletePost">{{ $t("actions.delete_post") }}</HamburgerButton>
         </Hamburger>
       </div>
     </div>
