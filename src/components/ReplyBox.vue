@@ -8,6 +8,10 @@ import { MediaAttachment } from "@/api/entities/media-attachment";
 import ReplyBoxAttachment from "@/components/ReplyBoxAttachment.vue";
 import IconButton from "@/components/IconButton.vue";
 
+const emit = defineEmits<{
+  submitted: [post: Status]
+}>();
+
 const message = ref<string>("");
 const sensitive = ref<boolean>(false);
 const visibility = ref<string>("public");
@@ -65,6 +69,9 @@ let sendPost = async () => {
   attachments.value = [];
   
   const resp = await call<Status>("/api/v1/statuses", params);
+  if (resp !== undefined && resp !== null) {
+    emit("submitted", resp);
+  }
   
   uploading.value = false;
 };

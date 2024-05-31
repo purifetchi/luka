@@ -4,9 +4,12 @@ import SidePanelUserCard from "@/components/SidePanelUserCard.vue";
 import SidePanelNotificationCard from "@/components/SidePanelNotificationCard.vue";
 import NavbarIconLink from "@/components/NavbarIconLink.vue";
 import { ref } from "vue";
-import { FwbInput } from "flowbite-vue";
 import SearchBox from "@/components/SearchBox.vue";
+import { FwbAvatar } from "flowbite-vue";
+import { store } from "@/store/store";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const title = ref<string>(localStorage.getItem("timeline"));
 
 let setNavbarTitle = (text: string) => {
@@ -33,7 +36,19 @@ let setNavbarTitle = (text: string) => {
         </div>
         <div class="font-bold flex flex-1 justify-end items-center mr-3">{{ title }}</div>
       </nav>
-      <slot></slot>
+      <section class="min-h-screen">
+        <slot></slot>
+      </section>
+      <nav class="md:hidden mb-2 backdrop-blur-3xl sticky bottom-0 z-50 flex justify-around">
+        <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-quill-pen-line" url="/compose" name="Compose" />
+        <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-notification-2-line" url="/notifications" name="Notifications" />
+        <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-search-line" url="/search" name="Search" />
+        <fwb-avatar 
+            class="p-2.5 hover:cursor-pointer" 
+            v-if="store.self_account !== null" 
+            v-on:click="router.push(`/user/${store.self_account.id}`)"
+            :img="store.self_account.avatar" />
+      </nav>
     </main>
     <aside class="hidden max-w-[20rem] w-full md:block">
       <div class="sticky top-5 space-y-4">

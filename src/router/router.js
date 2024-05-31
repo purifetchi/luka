@@ -8,6 +8,8 @@ import OAuthCallback from "@/components/views/OAuthCallback.vue";
 import CommunityTimeline from "@/components/views/CommunityTimeline.vue";
 import BookmarkTimeline from "@/components/views/BookmarkTimeline.vue";
 import SearchView from "@/components/views/SearchView.vue";
+import NotificationsView from "@/components/views/NotificationsView.vue";
+import ComposeView from "@/components/views/ComposeView.vue";
 
 const routes = [
     { path: "/",  component: Landing },
@@ -18,6 +20,8 @@ const routes = [
     { path: "/timelines/bookmarks", component: BookmarkTimeline },
 
     { path: "/search", component: SearchView },
+    { path: "/notifications", component: NotificationsView },
+    { path: "/compose", component: ComposeView },
     
     { path: "/user/:id", component: UserView },
     { path: "/posts/:id", component: PostView },

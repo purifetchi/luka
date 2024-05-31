@@ -8,6 +8,7 @@ import { call } from "@/api/mastodon";
 import Post from "@/components/Post.vue";
 import { FwbHeading } from "flowbite-vue";
 import FullPageSpinner from "@/components/FullPageSpinner.vue";
+import SearchBox from "@/components/SearchBox.vue";
 
 const route = useRoute();
 const search = ref<SearchResponse>(null);
@@ -31,6 +32,7 @@ watch(
 
 <template>
   <PanelLayout>
+    <SearchBox class="md:hidden" />
     <div v-if="search">
       <div class="space-y-3">
         <fwb-heading tag="h3">Accounts</fwb-heading>
