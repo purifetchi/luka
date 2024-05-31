@@ -52,9 +52,12 @@ let sendPost = async () => {
     media_ids: attachments.value.map(a => a.id),
     visibility: visibility.value,
     in_reply_to_id: props.inReplyTo,
-    sensitive: sensitive.value,
-    spoiler_text: cw.value
+    sensitive: sensitive.value
   };
+  
+  if (cw.value !== null) {
+    params["spoiler_text"] = cw.value;
+  }
   
   message.value = "";
   cw.value = "";
