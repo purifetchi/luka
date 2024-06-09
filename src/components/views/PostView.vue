@@ -31,6 +31,8 @@ let loadPost = async () => {
   const context = await call<StatusContextResponse>(`/api/v1/statuses/${route.params.id}/context`);
   ascendants.value = context.ancestors;
   descendants.value = context.descendants;
+  
+  document.title = `${post.value.account.display_name}'s post`;
 };
 
 onMounted(async () => {

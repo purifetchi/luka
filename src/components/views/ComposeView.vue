@@ -3,6 +3,11 @@ import PanelLayout from "@/components/layouts/PanelLayout.vue";
 import ReplyBox from "@/components/ReplyBox.vue";
 import { useRouter } from "vue-router";
 import { Status } from "@/api/entities/status";
+import {onMounted} from "vue";
+
+onMounted(() => {
+  document.title = "Compose a post";
+});
 
 const router = useRouter();
 

@@ -19,6 +19,8 @@ let doSearch = async () => {
   }
 
   search.value = await call<SearchResponse>(`/api/v2/search?q=${encodeURIComponent(route.query.query)}&resolve=true`);
+  
+  document.title = `Searching for ${route.query.query}`;
 };
 
 onMounted(doSearch);
@@ -34,12 +36,6 @@ watch(
   <PanelLayout>
     <SearchBox class="md:hidden" />
     <div v-if="search">
-      <div class="space-y-3">
-        <fwb-heading tag="h3">Accounts</fwb-heading>
-        <RouterLink v-for="account in search.accounts" :to="`/user/${account.id}`">
-          {{ account.display_name }} {{ account.acct }}
-        </RouterLink>
-      </div>
       <div class="space-y-3">
         <fwb-heading tag="h3">Posts</fwb-heading>
         <Post v-for="status in search.statuses" :status="status" />

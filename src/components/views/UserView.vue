@@ -15,6 +15,8 @@ const account = ref<Account>(null);
 let updateUserData = async () => {
   account.value = await call<Account>(`/api/v1/accounts/${ route.params.id }`);
   endpoint.value = `/api/v1/accounts/${ route.params.id }/statuses`;
+  
+  document.title = `${account.value.display_name}'s account`;
 };
 
 onMounted(async () => {

@@ -5,11 +5,11 @@ import {call} from "@/api/mastodon";
 import NotificationItem from "@/components/NotificationItem.vue";
 import FullPageSpinner from "@/components/FullPageSpinner.vue";
 import PanelLayout from "@/components/layouts/PanelLayout.vue";
-
 const notifs = ref<Notification[]>(null);
 
 onMounted(async () => {
   notifs.value = await call<Notification[]>(`/api/v1/notifications`);
+  document.title = "Notifications";
 });
 
 </script>

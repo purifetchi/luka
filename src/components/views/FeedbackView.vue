@@ -1,7 +1,11 @@
 <script lang="ts" setup>
   import PanelLayout from "@/components/layouts/PanelLayout.vue";
-  import { ref } from "vue";
+  import {onMounted, ref} from "vue";
   import {FwbButton, FwbInput, FwbRadio, FwbSelect, FwbTextarea} from "flowbite-vue";
+
+  onMounted(() => {
+    document.title = "Leave feedback";
+  });
   
   interface Message {
     name: string, 
