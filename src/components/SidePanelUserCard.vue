@@ -8,6 +8,9 @@ import ReplyBox from "@/components/ReplyBox.vue";
 import Hamburger from "@/components/Hamburger.vue";
 import { logout } from "@/api/mastodon";
 import HamburgerButton from "@/components/HamburgerButton.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 onMounted(async () => {
   if (store.self_account !== null) {
@@ -20,6 +23,11 @@ onMounted(async () => {
   
   store.self_account = await call<Account>("/api/v1/accounts/verify_credentials");
 });
+
+let doLogout = async () => {
+  await logout();
+  await router.push("/");
+};
 </script>
 
 <template>
@@ -34,7 +42,7 @@ onMounted(async () => {
       <Hamburger>
         <HamburgerButton>Follow requests</HamburgerButton>
         <HamburgerButton>Settings</HamburgerButton>
-        <HamburgerButton class="text-red-700 hover:cursor-pointer" @click="logout">Log out</HamburgerButton>
+        <HamburgerButton class="text-red-700 hover:cursor-pointer" @click="doLogout">Log out</HamburgerButton>
       </Hamburger>
     </div>
   </div>
