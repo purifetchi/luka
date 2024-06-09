@@ -78,9 +78,9 @@ let follow = async () => {
         </Hamburger>
       </div>
     </div>
-    <div class="backdrop-blur-xl p-2.5 backdrop-brightness-50 space-y-2">
+    <div class="user-card backdrop-blur-xl p-2.5 backdrop-brightness-50 space-y-2">
       <div class="flex space-x-3">
-        <fwb-avatar size="xl" :img="props.account.avatar" />
+        <fwb-avatar class="user-card-avatar" size="xl" :img="props.account.avatar" />
         <div class="space-y-2 max-w-full">
           <fwb-heading tag="h2">{{ props.account.display_name }}</fwb-heading>
           <span class="text-sm text-gray-400">@{{ props.account.acct }}</span>
@@ -96,5 +96,22 @@ let follow = async () => {
   </div>
 </template>
 
-<style scoped>
+<style>
+  .user-card * {
+    word-break: break-word;
+  }
+
+  @media (max-width: 768px)  {
+    .user-card-avatar div {
+      width: 6rem !important;
+      height: 6rem !important;
+      max-width: 6rem;
+      max-height: 6rem;
+    }
+    
+    .user-card-avatar img {
+      max-width: 6rem;
+      max-height: 6rem;
+    }
+  }
 </style>
