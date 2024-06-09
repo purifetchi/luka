@@ -82,6 +82,14 @@ let deletePost = async () => {
     font-weight: bold;  
   }
   
+  .post-content {
+    word-break: break-all;
+  }
+
+  .post-content * {
+    word-break: break-all;
+  }
+  
   .post-content a:hover {
     text-decoration: underline;
   }
