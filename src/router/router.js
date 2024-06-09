@@ -10,6 +10,7 @@ import BookmarkTimeline from "@/components/views/BookmarkTimeline.vue";
 import SearchView from "@/components/views/SearchView.vue";
 import NotificationsView from "@/components/views/NotificationsView.vue";
 import ComposeView from "@/components/views/ComposeView.vue";
+import FeedbackView from "@/components/views/FeedbackView.vue";
 
 const routes = [
     { path: "/",  component: Landing },
@@ -22,6 +23,8 @@ const routes = [
     { path: "/search", component: SearchView },
     { path: "/notifications", component: NotificationsView },
     { path: "/compose", component: ComposeView },
+
+    { path: "/feedback", component: FeedbackView },
     
     { path: "/user/:id", component: UserView },
     { path: "/posts/:id", component: PostView },

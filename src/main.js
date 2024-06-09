@@ -32,7 +32,8 @@ import {
     RiUpload2Line,
     RiMailLine,
     RiNotification2Line,
-    RiQuillPenLine
+    RiQuillPenLine,
+    RiFeedbackLine
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -56,7 +57,8 @@ addIcons(
     RiUpload2Line,
     RiMailLine,
     RiNotification2Line,
-    RiQuillPenLine
+    RiQuillPenLine,
+    RiFeedbackLine
 );
 
 i18next.init({

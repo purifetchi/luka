@@ -61,6 +61,7 @@ let setNavbarTitle = (text: string) => {
           <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-community-line" url="/timelines/community" name="Community timeline" />
           <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-global-line" url="/timelines/public" name="Public timeline" />
           <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-bookmark-line" url="/timelines/bookmarks" name="Bookmarks" />
+          <NavbarIconLink @timelineChanged="setNavbarTitle" class="p-2.5" icon="ri-feedback-line" url="/feedback" name="Feedback" />
         </div>
         <div class="font-bold flex flex-1 justify-end items-center mr-3">{{ title }}</div>
       </nav>
