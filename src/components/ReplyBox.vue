@@ -49,6 +49,11 @@ let attachFile = async () => {
 };
 
 let sendPost = async () => {
+  if ((message.value === "" || message.value === null) && attachments.value.length < 1) {
+    alert("Cannot send an empty post!");
+    return;
+  }
+  
   uploading.value = true;
   
   let params = {
