@@ -1,5 +1,5 @@
 <script setup>
-import {onBeforeUnmount, onMounted, ref} from "vue";
+  import {onBeforeUnmount, onMounted, ref} from "vue";
 
   const emit = defineEmits(["intersected"]);
   const trigger = ref(null);
