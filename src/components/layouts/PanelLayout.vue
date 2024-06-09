@@ -3,7 +3,7 @@
 import SidePanelUserCard from "@/components/SidePanelUserCard.vue";
 import SidePanelNotificationCard from "@/components/SidePanelNotificationCard.vue";
 import NavbarIconLink from "@/components/NavbarIconLink.vue";
-import { ref } from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 import SearchBox from "@/components/SearchBox.vue";
 import { FwbAvatar } from "flowbite-vue";
 import { store } from "@/store/store";
@@ -11,6 +11,33 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const title = ref<string>(localStorage.getItem("timeline"));
+
+onMounted(() => {
+  window.addEventListener("resize", onResize);
+  onResize();
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", onResize);
+});
+
+let onResize = () => {
+  const { offsetWidth } = document.getElementById("app");
+  const panel = document.getElementById("right-panel");
+  const leftAsidePanel = document.getElementById("left-aside-responsive-container");
+  const rightAsidePanel = document.getElementById("right-aside-responsive-container");
+  const rightAside = document.getElementById("right-aside");
+  
+  console.log(offsetWidth);
+  
+  if (offsetWidth < 1030) {
+    leftAsidePanel.appendChild(panel);
+    rightAside.style.display = "none";
+  } else {
+    rightAsidePanel.appendChild(panel);
+    rightAside.style.display = "block";
+  }
+};
 
 let setNavbarTitle = (text: string) => {
   title.value = text;
@@ -24,6 +51,7 @@ let setNavbarTitle = (text: string) => {
     <aside class="hidden max-w-[20rem] w-full md:block">
       <div class="sticky top-5">
         <SidePanelUserCard />
+        <div id="left-aside-responsive-container"></div>
       </div>
     </aside>
     <main class="max-w-2xl w-full">
@@ -50,10 +78,12 @@ let setNavbarTitle = (text: string) => {
             :img="store.self_account.avatar" />
       </nav>
     </main>
-    <aside class="hidden max-w-[20rem] w-full md:block">
-      <div class="sticky top-5 space-y-4">
-        <SearchBox />
-        <SidePanelNotificationCard />
+    <aside id="right-aside" class="hidden max-w-[20rem] w-full md:block">
+      <div id="right-aside-responsive-container" class="sticky top-5">
+        <div id="right-panel" class="space-y-4">
+          <SearchBox />
+          <SidePanelNotificationCard />
+        </div>
       </div>
     </aside>
   </div>
