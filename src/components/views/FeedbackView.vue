@@ -90,7 +90,20 @@
   let editItem = (item: Message) => {
     form.value = { ...item };
     edited = item;
-  }
+  };
+  
+  let cancel = () => {
+    form.value = {
+      name: '',
+      email: '',
+      message: '',
+      reportType: '',
+      priority: '',
+      phone: ''
+    };
+    
+    edited = null;
+  };
 </script>
 
 <template>
@@ -139,8 +152,9 @@
           <span id="priority-required" class="text-red-500 text-sm font-bold" style="display: none;">This field is required!</span>
         </div>
 
-        <div>
+        <div class="space-x-2">
           <fwb-button>Submit</fwb-button>
+          <fwb-button v-on:click.prevent="cancel">Cancel</fwb-button>
         </div>
       </form>
     </div>
