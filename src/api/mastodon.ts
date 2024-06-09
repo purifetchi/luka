@@ -21,7 +21,7 @@ export enum Method {
  * @param url The url of the method.
  * @param params The parameters to pass.
  * @param methodOverride The method override.
- * @returns {Promise<TResponse>}
+ * @returns
  */
 export async function call<TResponse>(
     url: string,

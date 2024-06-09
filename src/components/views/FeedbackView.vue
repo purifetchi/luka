@@ -2,8 +2,17 @@
   import PanelLayout from "@/components/layouts/PanelLayout.vue";
   import { ref } from "vue";
   import {FwbButton, FwbInput, FwbRadio, FwbSelect, FwbTextarea} from "flowbite-vue";
+  
+  interface Message {
+    name: string, 
+    email: string,
+    message: string,
+    reportType: string,
+    priority: string,
+    phone: string
+  }
 
-  const form = ref({
+  const form = ref<Message>({
     name: '',
     email: '',
     message: '',
@@ -11,6 +20,8 @@
     priority: '',
     phone: ''
   });
+  
+  let edited: Message = null;
   
   const reports = ref<any[]>(JSON.parse(localStorage.getItem("feedback")) as any[] ?? []);
 
@@ -54,11 +65,28 @@
     if (!confirmed) {
       return;
     }
-    
+
     submitted.value = true;
-    reports.value = [...reports.value, form.value];
+    
+    if (edited !== null) {
+      reports.value = reports.value.map(obj => obj === edited ? form.value : obj);
+      edited = null;
+    }
+    else {
+      reports.value = [...reports.value, form.value];
+    }
+
     localStorage.setItem("feedback", JSON.stringify(reports.value));
   };
+  
+  let removeItem = (item: Message) => {
+    reports.value = reports.value.filter(i => i !== item);
+  };
+  
+  let editItem = (item: Message) => {
+    form.value = { ...item };
+    edited = item;
+  }
 </script>
 
 <template>
@@ -122,7 +150,10 @@
         <div>Message: {{ item.message }}</div>
         <div>Report type: {{ item.reportType }}</div>
         <div>Priority: {{ item.priority }}</div>
-        <fwb-button>Delete</fwb-button>
+        <div class="space-x-2">
+          <fwb-button v-on:click.prevent="editItem(item)">Edit</fwb-button>
+          <fwb-button v-on:click.prevent="removeItem(item)">Delete</fwb-button>
+        </div>
       </div>
     </div>
   </PanelLayout>

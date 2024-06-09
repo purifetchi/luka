@@ -15,10 +15,7 @@ const status = ref<Status>(null);
 const replying = ref<boolean>(false);
 
 const startingReply = computed(() => {
-  let mentions = `@${props.status.account.acct}`;
-  // TODO: Add in mentions   too.
-  
-  return mentions;
+  return `@${props.status.account.acct}`;
 });
 
 onBeforeMount(() => {

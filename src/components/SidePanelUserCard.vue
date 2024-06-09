@@ -3,7 +3,7 @@ import { store } from "@/store/store.js";
 import { call } from "@/api/mastodon";
 import { onMounted } from "vue";
 import { Account } from "@/api/entities/account";
-import { FwbAvatar, FwbListGroup } from "flowbite-vue";
+import { FwbAvatar } from "flowbite-vue";
 import ReplyBox from "@/components/ReplyBox.vue";
 import Hamburger from "@/components/Hamburger.vue";
 import { logout } from "@/api/mastodon";

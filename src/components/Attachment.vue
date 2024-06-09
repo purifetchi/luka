@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 
 import { AttachmentType, MediaAttachment } from "@/api/entities/media-attachment";
-import {computed} from "vue";
+import { computed } from "vue";
 
 const props = defineProps<{
   attachment: MediaAttachment,

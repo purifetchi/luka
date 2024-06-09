@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 
-import { FwbCard } from "flowbite-vue";
-import { store } from "@/store/store.js";
 import { Notification } from "@/api/entities/notification";
 import { onMounted, ref } from "vue";
 import { call } from "@/api/mastodon";

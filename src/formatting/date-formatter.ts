@@ -26,4 +26,4 @@ export function formatDateRelative (date: string) : string {
         return Math.floor(interval) + " minutes";
     
     return Math.floor(seconds) + " seconds";
-};
+}
