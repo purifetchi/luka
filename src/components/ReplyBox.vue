@@ -76,6 +76,7 @@ let sendPost = async () => {
   const resp = await call<Status>("/api/v1/statuses", params);
   if (resp !== undefined && resp !== null) {
     emit("submitted", resp);
+    window.location.reload(); // hack
   }
   
   uploading.value = false;

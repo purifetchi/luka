@@ -9,7 +9,6 @@ const props = defineProps<{
 </script>
 
 <template>
-  <!-- TODO: This is fucking ugly, can we make it look somehow nicer? -->
   <div v-if="props.attachments.length > 0" class="attachment-gallery">
     <Attachment v-if="props.attachments.length == 1" :sensitive="props.sensitive" :attachment="props.attachments[0]" />
     <div v-else-if="props.attachments.length == 2" class="grid grid-cols-2 grid-rows-1 gap-2">

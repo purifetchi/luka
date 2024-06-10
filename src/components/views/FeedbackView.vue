@@ -85,6 +85,7 @@
   
   let removeItem = (item: Message) => {
     reports.value = reports.value.filter(i => i !== item);
+    localStorage.setItem("feedback", JSON.stringify(reports.value));
   };
   
   let editItem = (item: Message) => {
