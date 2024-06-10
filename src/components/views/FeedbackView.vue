@@ -150,7 +150,7 @@
                 required
             />
           </div>
-          <span id="priority-required" class="text-red-500 text-sm font-bold" style="display: none;">This field is required!</span>
+          <span id="priority-required" class="text-red-500 text-sm font-bold" style="display: none;">This field is required! Please select one of the options.</span>
         </div>
 
         <div class="space-x-2">
