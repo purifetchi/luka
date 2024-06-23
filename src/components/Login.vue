@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { scopes, login, getDomain } from "@/api/mastodon.js";
+  import { login, getDomain, getScopes } from "@/api/mastodon.js";
   import { FwbButton, FwbInput } from "flowbite-vue";
   import { router } from "@/router/router";
   import { config } from "@/config/config";
@@ -22,6 +22,7 @@
   };
   
   let sendTokenRequest = async () => {
+    const scopes = await getScopes();
     const path = `/oauth/authorize?response_type=code&client_id=${store.client_id}&redirect_uri=${encodeURIComponent(window.location.protocol + "//" + window.location.host + "/auth_callback")}&scope=${scopes}`;
     window.location.href = `${getDomain()}${path}`;
   };

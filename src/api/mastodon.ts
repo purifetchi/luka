@@ -2,9 +2,12 @@ import { config } from '@/config/config';
 import { store } from '@/store/store';
 import { AppRegisterResponse } from "./responses/apps/app-register-response";
 import {TokenResponse} from "./responses/oauth/token-response";
+import { NodeInfoVersionSelector } from "./nodeinfo/nodeinfo-version-selector";
+import {NodeInfo2} from "./nodeinfo/nodeinfo-2";
 
 const redirectUri = `${window.location.protocol}//${window.location.host}/auth_callback`;
-export const scopes = 'read write follow write:bites';
+
+const defaultScopes = 'read write follow';
 
 /**
  * The HTTP method to use.
@@ -14,6 +17,53 @@ export enum Method {
     POST = "POST",
     PUT = "PUT",
     DELETE = "DELETE"
+}
+
+/**
+ * Gets the scopes for the app.
+ */
+export async function getScopes() {
+    const nodeInfoVersionSelector = await call<NodeInfoVersionSelector>("/.well-known/nodeinfo");
+    
+    const versions = nodeInfoVersionSelector.links
+        .filter(link => link.rel.startsWith("http://nodeinfo.diaspora.software/ns/schema/2."))
+        .sort((a, b) => {
+            const relA = a.rel.toUpperCase();
+            const relB = b.rel.toUpperCase();
+            
+            if (relA < relB) {
+                return 1;
+            }
+            
+            if (relA > relB) {
+                return -1;
+            }
+            
+            return 0;
+        });
+    
+    if (versions.length === 0) {
+        return defaultScopes;
+    }
+    
+    
+    try {
+        const nodeInfo = await call<NodeInfo2>(versions[0].href.replace(getDomain(), ""));
+        if (nodeInfo.operations === null) {
+            return defaultScopes;
+        }
+
+        let extraScopes = "";
+
+        // Support for bites
+        if (nodeInfo.operations["com.shinolabs.api.bite"].length !== 0) {
+            extraScopes += " write:bites";
+        }
+
+        return `${defaultScopes}${extraScopes}`;
+    } catch {
+        return defaultScopes;
+    }
 }
 
 /**
@@ -94,7 +144,7 @@ export async function call<TResponse>(
 export async function registerApp() {
     const resp = await call<AppRegisterResponse>("/api/v1/apps", {
         client_name: config.app_name,
-        scopes: scopes,
+        scopes: await getScopes(),
         redirect_uris: redirectUri
     });
 
