@@ -27,7 +27,8 @@ export function getDomain() {
  * Ensures that the domain is set.
  */
 export async function ensureDomainIsSet() {
-    if (config.domain === "" || config.domain === undefined) {
+    if (config.domain === "" || config.domain === undefined &&
+        (localStorage.getItem("domain") === null || localStorage.getItem("domain") === undefined)) {
         let domainValid = false;
         
         while (!domainValid) {
