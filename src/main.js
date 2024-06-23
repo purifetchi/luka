@@ -6,6 +6,8 @@ import { createApp } from 'vue'
 import { router } from "@/router/router.js";
 import App from './App.vue'
 
+import {ensureDomainIsSet} from "@/api/mastodon";
+
 import i18next from "i18next";
 import I18NextVue from "i18next-vue";
 import Translations from "@/intl/i18n.js";
@@ -59,7 +61,9 @@ addIcons(
     RiQuillPenLine
 );
 
-i18next.init({
+await ensureDomainIsSet();
+
+await i18next.init({
     resources: Translations,
     fallbackLng: "en",
 });

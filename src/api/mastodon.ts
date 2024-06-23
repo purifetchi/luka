@@ -17,6 +17,34 @@ export enum Method {
 }
 
 /**
+ * Gets the current domain
+ */
+let getDomain = () : string => {
+    return config.domain ?? localStorage.getItem("domain");
+};
+
+/**
+ * Ensures that the domain is set.
+ */
+export async function ensureDomainIsSet() {
+    if (config.domain === "" || config.domain === undefined) {
+        let domainValid = false;
+        
+        while (!domainValid) {
+            const domain = prompt("Please enter a domain name (e.g. https://example.com)");
+            localStorage.setItem("domain", domain);
+
+            try {
+                let _ = await call<{}>("/api/v1/instance");
+                domainValid = true;
+            } catch {
+
+            }
+        }
+    }
+}
+
+/**
  * Calls a mastodon api.
  * @param url The url of the method.
  * @param params The parameters to pass.
@@ -44,14 +72,14 @@ export async function call<TResponse>(
             body = JSON.stringify(params);
         }
         
-        data = await fetch(`${config.domain}${url}`, {
+        data = await fetch(`${getDomain()}${url}`, {
            method: methodOverride ?? "POST",
            body: body,
             
            headers: headers
         });
     } else {
-        data = await fetch(`${config.domain}${url}`, {
+        data = await fetch(`${getDomain()}${url}`, {
             headers: headers
         });
     }
