@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { ref } from "vue";
-  import { scopes, login } from "@/api/mastodon.js";
+  import { scopes, login, getDomain } from "@/api/mastodon.js";
   import { FwbButton, FwbInput } from "flowbite-vue";
   import { router } from "@/router/router";
   import { config } from "@/config/config";
@@ -23,7 +23,7 @@
   
   let sendTokenRequest = async () => {
     const path = `/oauth/authorize?response_type=code&client_id=${store.client_id}&redirect_uri=${encodeURIComponent(window.location.protocol + "//" + window.location.host + "/auth_callback")}&scope=${scopes}`;
-    window.location.href = `${config.domain}${path}`;
+    window.location.href = `${getDomain()}${path}`;
   };
 </script>
 
@@ -33,7 +33,7 @@
     <fwb-input size="md" v-model="password" type="password" placeholder="Your password" required />
     <fwb-button type="submit">Login</fwb-button>
   </form>
-  <fwb-button v-else @click="sendTokenRequest">Sign in via {{ config.domain }}</fwb-button>
+  <fwb-button v-else @click="sendTokenRequest">Sign in via {{ getDomain() }}</fwb-button>
 </template>
 
 <style scoped>

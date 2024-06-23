@@ -19,7 +19,7 @@ export enum Method {
 /**
  * Gets the current domain
  */
-let getDomain = () : string => {
+export function getDomain() {
     return config.domain ?? localStorage.getItem("domain");
 };
 
